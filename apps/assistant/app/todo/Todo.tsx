@@ -1,7 +1,7 @@
-import { Box, Text } from "@/library/ui"
-import { todo } from "../api/todo/types"
-import { format, timeStatus } from "@/library/time"
 import { twMerge } from "tailwind-merge"
+import { Box, Text } from "@zind/ui"
+import { format, timeStatus } from "@zind/time"
+import { todo } from "../api/todo/types"
 
 interface props {
   item: todo

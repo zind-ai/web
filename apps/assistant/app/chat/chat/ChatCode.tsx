@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Code } from "@/library/ui"
+import { Box, Code } from "@zind/ui"
 
 interface props {
   codeBlock: string[]

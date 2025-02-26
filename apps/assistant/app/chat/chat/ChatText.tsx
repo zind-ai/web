@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, Text } from "@/library/ui"
+import { Link, Text } from "@zind/ui"
 
 interface props {
   text: string

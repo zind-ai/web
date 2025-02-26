@@ -1,7 +1,5 @@
-import { callAPI, catchErrorMessage } from "@/library/utils/api"
-import { trim } from "@/library/utils/string"
-import { supabase_client } from "@/library/client/supabase"
-import { chat_role } from "@/library/client/openai"
+import { callAPI, catchErrorMessage, trim } from "@zind/utils"
+import { supabase_client, openai_chat_role } from "@zind/sdk"
 import { getRecentChats } from "./context/getRecentChats"
 import { assistant_instructions } from "./context/assistant"
 import { chats_table } from "./consts"
@@ -47,7 +45,7 @@ export async function POST(req: Request) {
       },
       onSuccess: async (data: post_response) => {
         assistant_response = {
-          role: chat_role.assistant,
+          role: openai_chat_role.assistant,
           user_id: user_id,
           message: data.message,
         }
@@ -65,7 +63,7 @@ export async function POST(req: Request) {
         .from(chats_table)
         .insert([
           {
-            role: chat_role.user,
+            role: openai_chat_role.user,
             user_id: user_id,
             message: message,
             created_at: now,
@@ -78,7 +76,7 @@ export async function POST(req: Request) {
 
       // 4. send back assistant's reply
       const assistant_chat = lastChats.find(
-        (chat: chat) => chat.role === chat_role.assistant
+        (chat: chat) => chat.role === openai_chat_role.assistant
       )
 
       const response = new Response(
@@ -93,7 +91,7 @@ export async function POST(req: Request) {
 
       // 5. save memory
       const user_chat = lastChats.find(
-        (chat: chat) => chat.role === chat_role.user
+        (chat: chat) => chat.role === openai_chat_role.user
       )
       const memory_context = `${recent_chats}\n\n${past_memories}`
       saveMemory(memory_context, message, user_chat.id)

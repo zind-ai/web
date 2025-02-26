@@ -1,6 +1,6 @@
-import { catchErrorMessage } from "@/library/utils/api"
-import { supabase_client } from "@/library/client/supabase"
-import { trim } from "@/library/utils/string"
+import { catchErrorMessage, trim } from "@zind/utils"
+import { supabase_client } from "@zind/sdk"
+
 import { todos_table } from "./consts"
 
 export async function DELETE(req: Request) {

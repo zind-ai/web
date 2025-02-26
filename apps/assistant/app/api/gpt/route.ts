@@ -1,6 +1,5 @@
-import { chat_role, gpt_model, openai_client } from "@/library/client/openai"
-import { catchErrorMessage } from "@/library/utils/api"
-import { trim } from "@/library/utils/string"
+import { openai_chat_role, openai_gpt_model, openai_client } from "@zind/sdk"
+import { catchErrorMessage, trim } from "@zind/utils"
 
 export async function POST(req: Request) {
   try {
@@ -21,13 +20,13 @@ export async function POST(req: Request) {
     const openAI = openai_client()
 
     const response = await openAI.chat.completions.create({
-      model: gpt_model.gpt_4o_mini,
+      model: openai_gpt_model.gpt_4o_mini,
       messages: [
         {
-          role: chat_role.system,
+          role: openai_chat_role.system,
           content: context,
         },
-        { role: chat_role.user, content: prompt },
+        { role: openai_chat_role.user, content: prompt },
       ],
       // max_completion_tokens: 150,
 

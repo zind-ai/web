@@ -1,6 +1,6 @@
 import { user_id } from "@/app/global/login/user"
-import { format } from "@/library/time"
-import { callAPI } from "@/library/utils/api"
+import { callAPI } from "@zind/utils"
+import { format } from "@zind/time"
 import { endpoint_url } from "../../gpt/consts"
 import { post_response } from "../../gpt/types"
 import { endpoint_url as embedding_endpoint_url } from "../../gpt/embedding/consts"

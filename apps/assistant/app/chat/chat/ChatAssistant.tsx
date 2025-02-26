@@ -1,6 +1,6 @@
 import React from "react"
 import { twMerge } from "tailwind-merge"
-import { Box } from "@/library/ui"
+import { Box } from "@zind/ui"
 import { chatSegments } from "./chatSegments"
 import ChatHeading from "./ChatHeading"
 import ChatCode from "./ChatCode"

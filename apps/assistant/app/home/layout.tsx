@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Box, Provider } from "@/library/ui"
+import { Box, Provider } from "@zind/ui"
 import "../../style/globals.css"
 
 export const metadata: Metadata = {

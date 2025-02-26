@@ -6,10 +6,9 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "moduleResolution": "bundler",  
+    "moduleResolution": "node",
     "paths": {
-      "@/*": ["./*"],
-      "@web/*": ["../../packages/*"] 
+      "@/*": ["./*"]
     },
     "plugins": [
       {
@@ -21,7 +20,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
- 
+    ".next/types/**/*.ts",
+    "tailwind.config.js"
+  ]
 }

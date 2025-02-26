@@ -1,6 +1,6 @@
-import { supabase_client } from "@/library/client/supabase"
-import { catchErrorMessage } from "@/library/utils/api"
-import { trim } from "@/library/utils/string"
+import { supabase_client } from "@zind/sdk"
+import { catchErrorMessage, trim } from "@zind/utils"
+
 import { todos_table } from "./consts"
 
 export async function POST(req: Request) {

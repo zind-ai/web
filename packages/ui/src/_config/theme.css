@@ -1,6 +1,12 @@
-@import "tailwindcss";
+/* 
+  @import "@zind/ui/theme.css" 
 
-@custom-variant dark (&:where(.dark, .dark *));
+  Add this to the consuming app's global css file
+  
+*/
+
+@import "tailwindcss";
+@source "../../dist";
 
 @theme {
   --font-roboto: var(--font-roboto);

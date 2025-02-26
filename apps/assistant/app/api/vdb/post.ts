@@ -1,4 +1,4 @@
-import { callAPI, catchErrorMessage } from "@/library/utils/api"
+import { callAPI, catchErrorMessage } from "@zind/utils"
 import {
   collection_name,
   db_name,

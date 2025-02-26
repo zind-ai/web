@@ -1,4 +1,4 @@
-import { format } from "@/library/time"
+import { format } from "@zind/time"
 import { chat } from "../types"
 
 export const getRecentChats = (chats: chat[]): string => {

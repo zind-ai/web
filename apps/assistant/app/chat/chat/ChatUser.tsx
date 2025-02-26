@@ -1,5 +1,5 @@
 import React from "react"
-import { Text } from "@/library/ui"
+import { Text } from "@zind/ui"
 
 interface props {
   message: string

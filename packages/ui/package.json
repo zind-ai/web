@@ -2,13 +2,20 @@
   "name": "@zind/ui",
   "version": "1.0.0",
   "description": "Frontend only",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "private": true,
   "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./theme.css": "./dist/_config/theme.css"
+  },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tsc --outDir dist"
+    "build": "tsc --outDir dist && cp -R src/_config/*.css dist/_config"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0"

@@ -1,11 +1,11 @@
-import { callAPI } from "@/library/utils/api"
+import { callAPI } from "@zind/utils"
+import { format } from "@zind/time"
 import { endpoint_url } from "../../gpt/consts"
 import { post_response } from "../../gpt/types"
 import { endpoint_url as embedding_endpoint_url } from "../../gpt/embedding/consts"
 import { post_response as embedding_post_response } from "../../gpt/embedding/types"
 import { endpoint_url as vdb_search_endpoint_url } from "../../vdb/search/consts"
 import { post_response as vdb_search_post_response } from "../../vdb/search/types"
-import { format } from "@/library/time"
 
 const instructions =
   "Generate a cue message from user's message to retrieve relevant memories for better context. e.g. 1- memory: Faz's favorite color is gray. cue message: Faz favorite color 2- memory: Faz enjoys cooking healthy dishes, often using ingredients like aubergine, sweet potato, garlic, tomatoes, and spices. cue message: Faz cooking healthy dishes 3- memory: Faz was born on March 14th, 1992. cue message: Faz birthday age"

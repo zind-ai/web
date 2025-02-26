@@ -2,9 +2,15 @@
   "name": "@zind/time",
   "version": "1.0.0",
   "description": "Frontend and Backend agnostic",
+  "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "private": true,
+  "exports": {
+    ".": {
+      "import": "dist/index.js",
+      "require": "dist/index.js"
+    }
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "tsc --outDir dist"

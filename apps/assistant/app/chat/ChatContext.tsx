@@ -7,8 +7,8 @@ import {
   ReactNode,
   useEffect,
 } from "react"
-import { callAPI } from "@/library/utils/api"
-import { useToast } from "@/library/ui"
+import { useToast } from "@zind/ui"
+import { callAPI } from "@zind/utils"
 import { user_id } from "@/app/global/login/user"
 import { chat, get_response, post_response } from "@/app/api/chats/types"
 

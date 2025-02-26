@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Box, Provider } from "@/library/ui"
+import { Box, Provider } from "@zind/ui"
 import { Nav } from "./global/nav/Nav"
 import "../style/globals.css"
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body className="bg-grayscale-25 dark:bg-grayscale-800 font-sans">
+      <body className="bg-grayscale-50 dark:bg-grayscale-800 font-sans">
         <Provider>
           <Nav />
           <Box className="mt-12 flex p-5">{children}</Box>

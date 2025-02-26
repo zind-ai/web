@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react"
 import { v4 as uuid } from "uuid"
-import { Box, Loading } from "@/library/ui"
-import { chat_role } from "@/library/client/openai"
+import { Box, Loading } from "@zind/ui"
+import { openai_chat_role } from "@zind/sdk"
 import { user_id } from "@/app/global/login/user"
 import { useChat } from "./ChatContext"
 import ChatInput from "./ChatInput"
@@ -24,7 +24,7 @@ export const Chats = () => {
       addChat({
         id: uuid(),
         message: message,
-        role: chat_role.user,
+        role: openai_chat_role.user,
         user_id: user_id,
         created_at: new Date().toString(),
       })

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Send } from "lucide-react"
-import { Box, IconButton, Textarea } from "@/library/ui"
+import { Box, IconButton, Textarea } from "@zind/ui"
 
 interface props {
   onSendMessage: (message: string) => void

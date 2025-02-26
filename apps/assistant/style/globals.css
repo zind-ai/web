@@ -1,4 +1,4 @@
-@import "../library/ui/_config/theme.css";
+@import "@zind/ui/theme.css";
 
 :root {
   --foreground-rgb: 0, 0, 0;

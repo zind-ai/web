@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Loading, Text, View } from "@/library/ui"
+import { Box, Loading, Text, View } from "@zind/ui"
 import { useTodo } from "./TodoContext"
 import { Todo } from "./Todo"
 

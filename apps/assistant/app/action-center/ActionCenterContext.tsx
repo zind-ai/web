@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, ReactNode } from "react"
-import { callAPI } from "@/library/utils/api"
+import { callAPI } from "@zind/utils"
 import { instructions } from "./actions"
 import { useTodo } from "../todo/TodoContext"
 import { handleTodoAction } from "../todo/handleTodoAction"

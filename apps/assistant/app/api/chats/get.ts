@@ -1,6 +1,5 @@
-import { catchErrorMessage } from "@/library/utils/api"
-import { supabase_client } from "@/library/client/supabase"
-import { trim } from "@/library/utils/string"
+import { supabase_client } from "@zind/sdk"
+import { catchErrorMessage, trim } from "@zind/utils"
 import { chats_table } from "./consts"
 
 export async function GET(req: Request) {

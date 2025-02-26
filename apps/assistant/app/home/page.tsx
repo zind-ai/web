@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { PlayCircle } from "lucide-react"
-import { Box, Button, Text } from "@/library/ui"
+import { Box, Button, Text } from "@zind/ui"
 
 export const metadata: Metadata = {
   title: "zind",

@@ -1,6 +1,5 @@
-import { embedding_model, openai_client } from "@/library/client/openai"
-import { catchErrorMessage } from "@/library/utils/api"
-import { trim } from "@/library/utils/string"
+import { openai_embedding_model, openai_client } from "@zind/sdk"
+import { catchErrorMessage, trim } from "@zind/utils"
 
 export async function POST(req: Request) {
   try {
@@ -17,7 +16,7 @@ export async function POST(req: Request) {
     const openAI = openai_client()
 
     const response = await openAI.embeddings.create({
-      model: embedding_model.text_embedding_3_small,
+      model: openai_embedding_model.text_embedding_3_small,
       input: text,
       encoding_format: "float",
       dimensions: 512,
