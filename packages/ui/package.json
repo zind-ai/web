@@ -1,0 +1,23 @@
+{
+  "name": "@zind/ui",
+  "version": "1.0.0",
+  "description": "Frontend only",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc --outDir dist"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "lucide-react": "^0.394.0",
+    "tailwindcss": "^4.0.3",
+    "tailwind-merge": "^3.0.1"
+  }
+}

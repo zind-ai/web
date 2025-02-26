@@ -1,0 +1,12 @@
+{
+  "name": "@zind/time",
+  "version": "1.0.0",
+  "description": "Frontend and Backend agnostic",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc --outDir dist"
+  }
+}

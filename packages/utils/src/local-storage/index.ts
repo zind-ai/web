@@ -1,0 +1,6 @@
+export * from "./clear"
+export * from "./getItem"
+export * from "./hasItem"
+export * from "./isSupported"
+export * from "./removeItem"
+export * from "./setItem"

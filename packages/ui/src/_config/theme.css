@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-roboto: var(--font-roboto);
+
+  --color-grayscale: oklch(1 0 0);
+  --color-grayscale-25: oklch(0.992 0 0);
+  --color-grayscale-50: oklch(0.985 0 0);
+  --color-grayscale-75: oklch(0.978 0 0);
+  --color-grayscale-100: oklch(0.97 0 0);
+  --color-grayscale-125: oklch(0.946 0 0);
+  --color-grayscale-150: oklch(0.933 0 0);
+  --color-grayscale-175: oklch(0.9225 0 0);
+  --color-grayscale-200: oklch(0.922 0 0);
+  --color-grayscale-225: oklch(0.896 0 0);
+  --color-grayscale-250: oklch(0.883 0 0);
+  --color-grayscale-275: oklch(0.87 0 0);
+  --color-grayscale-300: oklch(0.87 0 0);
+  --color-grayscale-325: oklch(0.828 0 0);
+  --color-grayscale-350: oklch(0.797 0 0);
+  --color-grayscale-375: oklch(0.758 0 0);
+  --color-grayscale-400: oklch(0.708 0 0);
+  --color-grayscale-425: oklch(0.67 0 0);
+  --color-grayscale-450: oklch(0.632 0 0);
+  --color-grayscale-475: oklch(0.594 0 0);
+  --color-grayscale-500: oklch(0.556 0 0);
+  --color-grayscale-525: oklch(0.548 0 0);
+  --color-grayscale-550: oklch(0.54 0 0);
+  --color-grayscale-575: oklch(0.532 0 0);
+  --color-grayscale-600: oklch(0.439 0 0);
+  --color-grayscale-625: oklch(0.423 0 0);
+  --color-grayscale-650: oklch(0.407 0 0);
+  --color-grayscale-675: oklch(0.391 0 0);
+  --color-grayscale-700: oklch(0.371 0 0);
+  --color-grayscale-725: oklch(0.32 0 0);
+  --color-grayscale-750: oklch(0.295 0 0);
+  --color-grayscale-775: oklch(0.282 0 0);
+  --color-grayscale-800: oklch(0.269 0 0);
+  --color-grayscale-825: oklch(0.237 0 0);
+  --color-grayscale-850: oklch(0.221 0 0);
+  --color-grayscale-875: oklch(0.213 0 0);
+  --color-grayscale-900: oklch(0.205 0 0);
+  --color-grayscale-925: oklch(0.175 0 0);
+  --color-grayscale-950: oklch(0.145 0 0);
+  --color-grayscale-975: oklch(0.115 0 0);
+}

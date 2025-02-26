@@ -1,0 +1,16 @@
+{
+  "name": "@zind/sdk",
+  "version": "1.0.0",
+  "description": "Backend only",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc --outDir dist"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "openai": "^4.82.0"
+  }
+}

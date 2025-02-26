@@ -1,0 +1,33 @@
+{
+  "name": "@zind/assistant",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint './**/*.{ts,tsx}' --fix",
+    "lint:fix": "prettier --write . && pnpm lint && pnpm check-format",
+    "check-format": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@zind/ui": "workspace:*",
+    "@zind/sdk": "workspace:*",
+    "@zind/utils": "workspace:*",
+    "@zind/time": "workspace:*",
+    "lucide-react": "^0.394.0",
+    "next": "14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "uuid": "^10.0.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss": "^4.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.3",
+    "@types/uuid": "^10.0.0",
+    "postcss": "^8.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.11"
+  }
+}
