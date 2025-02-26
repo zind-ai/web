@@ -6,9 +6,10 @@
   "scripts": {
     "lint": "eslint 'packages/**/*.{ts,tsx}' 'apps/**/*.{ts,tsx}' --fix",
     "format": "prettier --write 'packages/**/*.{ts,tsx,js,jsx,json,md}' 'apps/**/*.{ts,tsx,js,jsx,json,md}'",
+    "dev": "pnpm --filter './apps/assistant' run dev",
     "build": "pnpm --filter './packages/*' run build",
     "clean": "pnpm --filter './packages/*' run clean",
-    "nuke": "rimraf node_modules && pnpm recursive exec -- rimraf node_modules dist"
+    "nuke": "pnpm recursive exec -- rimraf node_modules dist && rimraf node_modules"
   },
   "type": "module",
   "devDependencies": {
