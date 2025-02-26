@@ -54,8 +54,6 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     getTodos()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const addTodo = (newTodo: Omit<todo, "user_id">) => {

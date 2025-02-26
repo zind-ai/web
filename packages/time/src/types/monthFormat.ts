@@ -1,1 +1,1 @@
-export type MonthFormat = "short" | "long" | "numeric" | "2-digit" | "narrow";
+export type MonthFormat = "short" | "long" | "numeric" | "2-digit" | "narrow"

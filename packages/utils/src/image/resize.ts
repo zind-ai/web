@@ -9,7 +9,7 @@ export const resize = (file: File, maxSize = 400): Promise<File> => {
       const image_url = event.target!.result as string
       let image = document.createElement("img")
       image.src = image_url
-      image.onload = (e) => {
+      image.onload = () => {
         const canvas = calculateRatio(image, maxSize)
         let context = canvas.getContext("2d")
 

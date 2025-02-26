@@ -1,0 +1,8 @@
+# Check ESLint Standards
+pnpm lint ||
+(
+        echo 'Code format checks failed'
+        false; 
+)
+# If everything passes... Now we can commit
+echo '✅ Formatting checks passed'

@@ -1,4 +1,4 @@
 export const handleError = (message: string) => {
-  console.error(message);
-  return message;
-};
+  console.error(message)
+  return message
+}

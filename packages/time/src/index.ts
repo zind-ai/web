@@ -1,3 +1,3 @@
-export * from "./format";
-export * from "./timeStatus";
-export * from "./specificDay";
+export * from "./format"
+export * from "./timeStatus"
+export * from "./specificDay"

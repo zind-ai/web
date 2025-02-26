@@ -1,6 +1,6 @@
-import { hostName } from "./hostName";
-import { protocol } from "./protocol";
+import { hostName } from "./hostName"
+import { protocol } from "./protocol"
 
 export const domain = () => {
-  return `${protocol()}//${hostName()}`;
-};
+  return `${protocol()}//${hostName()}`
+}

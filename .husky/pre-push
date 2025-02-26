@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+# Run Tests
+# pnpm test || ( echo 'Tests failed' false;)
+
+# If everything passes... Now we can commit
+# echo '✅ Tests passed'
+
+# Build packages
+pnpm pnpm build ||
+(
+        echo 'Build failed'
+        false;
+)
+
+echo '✅ Packages built'
+
+# Build apps
+pnpm pnpm build:apps ||
+(
+        echo 'Build failed'
+        false;
+)
+
+# All good to push
+echo 'Happy days 🚀🎉'

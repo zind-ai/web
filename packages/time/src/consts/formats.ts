@@ -10,4 +10,4 @@ export const formats = {
   "unix-seconds": "unix-seconds",
   "unix-milliseconds": "unix-milliseconds",
   "unix-microseconds": "unix-microseconds",
-};
+}

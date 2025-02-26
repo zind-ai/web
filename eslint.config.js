@@ -1,6 +1,7 @@
 import * as eslintPluginTypescript from "@typescript-eslint/eslint-plugin"
 import eslintPluginPrettier from "eslint-plugin-prettier"
 import parser from "@typescript-eslint/parser"
+import prettierConfig from "./prettier.base.cjs"
 
 export default [
   {
@@ -22,7 +23,7 @@ export default [
       prettier: eslintPluginPrettier,
     },
     rules: {
-      "prettier/prettier": "warn",
+      "prettier/prettier": ["warn", prettierConfig],
       "no-console": ["error", { allow: ["error"] }],
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
@@ -33,5 +34,8 @@ export default [
     rules: {
       "no-undef": "off",
     },
+  },
+  {
+    ignores: ["**/dist/**", "**/node_modules/**"],
   },
 ]

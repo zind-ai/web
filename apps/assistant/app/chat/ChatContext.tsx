@@ -81,8 +81,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     getChats()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
