@@ -1,10 +1,11 @@
 import type { Metadata } from "next"
 import { Box, Provider } from "@zind/ui"
-import "../../style/globals.css"
+import "../style/globals.css"
 
 export const metadata: Metadata = {
   title: "zind",
-  description: "",
+  description:
+    "We’re on a mission to create a truly capable and personal AI for everyone.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body className="bg-grayscale-25 dark:bg-grayscale-800 font-sans">
+      <body className="dark:bg-grayscale-800 bg-grayscale-25 font-sans">
         <Provider>
           <Box className="mt-12 flex p-5">{children}</Box>
         </Provider>

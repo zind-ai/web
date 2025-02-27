@@ -36,8 +36,8 @@ export const Chats = () => {
   }, [chats])
 
   return (
-    <Box className="mx-auto h-screen w-full md:w-2xl">
-      <Box className="items-stretch space-y-3 pb-30">
+    <Box className="md:w-2xl mx-auto h-screen w-full">
+      <Box className="pb-30 items-stretch space-y-3">
         {loading && <Loading />}
 
         {chats.map((chat) => (
