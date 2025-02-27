@@ -24,7 +24,7 @@ export const Panel = forwardRef<HTMLDivElement, props>(
       >
         <DialogBackdrop
           transition
-          className="bg-grayscale-725/75 dark:bg-grayscale-725/75 fixed inset-0 transition-opacity duration-500 ease-in-out data-closed:opacity-0"
+          className="bg-grayscale-725/75 dark:bg-grayscale-725/75 data-closed:opacity-0 fixed inset-0 transition-opacity duration-500 ease-in-out"
         />
 
         <div className="fixed inset-0 overflow-hidden">
@@ -32,11 +32,11 @@ export const Panel = forwardRef<HTMLDivElement, props>(
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
               <DialogPanel
                 transition
-                className="pointer-events-auto relative w-screen max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700"
+                className="data-closed:translate-x-full pointer-events-auto relative w-screen max-w-md transform transition duration-500 ease-in-out sm:duration-700"
               >
                 <TransitionChild>
                   <X
-                    className="text-grayscale-700 dark:text-grayscale-200 absolute top-5 right-5 h-5 w-5 cursor-pointer"
+                    className="text-grayscale-700 dark:text-grayscale-200 absolute right-5 top-5 h-5 w-5 cursor-pointer"
                     onClick={onHide}
                   />
                 </TransitionChild>

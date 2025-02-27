@@ -12,7 +12,7 @@ export const Code = forwardRef<HTMLDivElement, props>(
       <Box className="bg-grayscale-125 dark:bg-grayscale-725 mt-3 rounded-2xl p-4">
         <Text
           ref={ref}
-          className="font-mono text-base whitespace-pre-wrap"
+          className="whitespace-pre-wrap font-mono text-base"
           {...props}
         >
           {children}

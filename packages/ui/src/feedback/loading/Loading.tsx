@@ -9,7 +9,7 @@ interface props {
 export const Loading = forwardRef<HTMLDivElement, props>(
   ({ ...props }, ref) => {
     return (
-      <Box ref={ref} className="mt-5 mb-5 text-center" {...props}>
+      <Box ref={ref} className="mb-5 mt-5 text-center" {...props}>
         <Text>Loading ...</Text>
       </Box>
     )
