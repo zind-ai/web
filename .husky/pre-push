@@ -5,7 +5,7 @@
 # echo '✅ Tests passed'
 
 # Build packages
-pnpm pnpm build ||
+pnpm pnpm build:packages ||
 (
         echo 'Build failed'
         false;
