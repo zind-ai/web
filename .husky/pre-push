@@ -20,5 +20,7 @@ pnpm pnpm build:apps ||
         false;
 )
 
+echo '✅ Apps built'
+
 # All good to push
 echo 'Happy days 🚀🎉'
