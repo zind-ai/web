@@ -4,8 +4,7 @@ import "../style/globals.css"
 
 export const metadata: Metadata = {
   title: "zind",
-  description:
-    "We’re on a mission to create a truly capable and personal AI for everyone.",
+  description: "We’re building a truly capable and personal AI.",
   icons: {
     icon: "/favicon.ico",
   },
