@@ -4,23 +4,15 @@
 # If everything passes... Now we can commit
 # echo '✅ Tests passed'
 
-# Build packages
-pnpm pnpm build:packages ||
+# Build packages and apps
+pnpm pnpm build ||
 (
         echo 'Build failed'
         false;
 )
 
-echo '✅ Packages built'
+echo '✅ Packages and Apps built'
 
-# Build apps
-pnpm pnpm build:apps ||
-(
-        echo 'Build failed'
-        false;
-)
-
-echo '✅ Apps built'
 
 # All good to push
 echo 'Happy days 🚀🎉'
