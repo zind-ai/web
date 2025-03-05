@@ -10,9 +10,6 @@ pnpm pnpm build ||
         echo 'Build failed'
         false;
 )
-
-echo '✅ Packages and Apps built'
-
-
-# All good to push
-echo 'Happy days 🚀🎉'
+echo ""
+echo '✅ Build successful'
+echo ""
