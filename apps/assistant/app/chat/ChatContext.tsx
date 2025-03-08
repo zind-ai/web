@@ -48,7 +48,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         setLoading(false)
       },
       onError(error) {
-        showToast(error.message, 3000)
+        showToast(error.message)
         setLoading(false)
       },
     })
@@ -74,7 +74,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       },
       onError: (error) => {
         setLoading(false)
-        showToast(error.message, 3000)
+        showToast(error.message)
       },
     })
   }

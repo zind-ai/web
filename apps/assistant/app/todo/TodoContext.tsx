@@ -47,7 +47,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       },
       onError: (error) => {
         setLoading(false)
-        showToast(error.message, 3000)
+        showToast(error.message)
       },
     })
   }
@@ -80,7 +80,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       },
       onError: (error) => {
         setLoading(false)
-        showToast(error.message, 3000)
+        showToast(error.message)
       },
     })
   }
@@ -103,7 +103,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       },
       onError: (error) => {
         setLoading(false)
-        showToast(error.message, 3000)
+        showToast(error.message)
       },
     })
   }

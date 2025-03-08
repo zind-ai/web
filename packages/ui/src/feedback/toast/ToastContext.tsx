@@ -12,7 +12,7 @@ const ToastContext = createContext<props | undefined>(undefined)
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [message, setMessage] = useState<string | null>(null)
 
-  const showToast = (message: string, duration = 3000) => {
+  const showToast = (message: string, duration = 5000) => {
     setMessage(message)
 
     setTimeout(() => setMessage(null), duration)

@@ -18,7 +18,7 @@ export const Text = forwardRef<HTMLElement, props<TextTags>>(
         // @ts-ignore
         ref={ref}
         className={twMerge(
-          "text-grayscale-700 dark:text-grayscale-200 text-base",
+          "text-grayscale-700 dark:text-grayscale-200 text-lg",
           className
         )}
         {...props}
