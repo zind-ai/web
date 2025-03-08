@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body className="dark:bg-grayscale-800 bg-grayscale-25 font-sans">
+      <body className="dark:bg-grayscale-800 bg-grayscale-25 font-sans font-normal">
         <Provider>
           <Box className="mt-12 flex p-5">{children}</Box>
         </Provider>
