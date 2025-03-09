@@ -19,7 +19,7 @@ const Chat = ({ chat }: props) => {
       className={twMerge(
         "flex rounded-3xl pt-3 pb-3",
         chat.role === openai_chat_role.user
-          ? "bg-grayscale-125 dark:bg-grayscale-725 w-auto place-self-end pr-5 pl-5 sm:max-w-[80%]"
+          ? "bg-grayscale-125 dark:bg-grayscale-725 ml-auto w-fit place-self-end pr-5 pl-5 sm:ml-0 sm:w-auto sm:max-w-[80%]"
           : "w-full place-self-start"
       )}
     >

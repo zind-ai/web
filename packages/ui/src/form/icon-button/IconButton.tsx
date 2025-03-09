@@ -27,7 +27,7 @@ export const IconButton = forwardRef<HTMLButtonElement, props>(
 
           // variant
           variant === "outlined" &&
-            "ring-grayscale-150 dark:ring-grayscale-600 hover:bg-grayscale-100 dark:hover:bg-grayscale-750 hover:ring-grayscale-150 dark:hover:ring-grayscale-600 active:bg-grayscale-125 dark:active:bg-grayscale-725 active:ring-grayscale-150 dark:active:ring-grayscale-600 disabled:ring-grayscale-150 dark:disabled:ring-grayscale-600 disabled:hover:bg-grayscale-25 dark:disabled:hover:bg-grayscale-800 ring-1",
+            "border-grayscale-150 dark:border-grayscale-600 hover:bg-grayscale-100 dark:hover:bg-grayscale-750 hover:border-grayscale-150 dark:hover:border-grayscale-600 active:bg-grayscale-125 dark:active:bg-grayscale-725 active:border-grayscale-150 dark:active:border-grayscale-600 disabled:border-grayscale-150 dark:disabled:border-grayscale-600 disabled:hover:bg-grayscale-25 dark:disabled:hover:bg-grayscale-800 border-1",
           variant === "contained" &&
             "bg-grayscale-250 dark:bg-grayscale-650 hover:bg-grayscale-200 dark:hover:bg-grayscale-700 active:bg-grayscale-200 dark:active:bg-grayscale-700 disabled:bg-grayscale-150 dark:disabled:bg-grayscale-600",
 

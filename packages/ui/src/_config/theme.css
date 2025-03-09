@@ -9,8 +9,10 @@
 @source "../../dist";
 
 @theme {
+  --breakpoint-xs: 30rem;
+
   --font-roboto: var(--font-roboto);
-  --font-weight-normal: 300;
+  --font-weight-normal: 350;
 
   --color-grayscale: oklch(1 0 0);
   --color-grayscale-25: oklch(0.992 0 0);

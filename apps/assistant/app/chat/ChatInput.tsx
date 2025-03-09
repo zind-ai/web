@@ -24,7 +24,7 @@ const ChatInput = ({ onSendMessage }: props) => {
   }
 
   return (
-    <Box className="bg-grayscale-25 dark:bg-grayscale-800 z-2 md:w-2xl fixed bottom-0 left-0 right-0 mx-auto w-full px-3 pb-5 md:px-0">
+    <Box className="bg-grayscale dark:bg-grayscale-800 fixed right-0 bottom-0 left-0 z-2 mx-auto w-full px-3 pb-5 md:w-2xl md:px-0">
       <Box className="relative">
         <Textarea
           value={message}
@@ -32,7 +32,7 @@ const ChatInput = ({ onSendMessage }: props) => {
           onKeyDown={handleKeyDown}
           placeholder="Message story"
           aria-label="Message story"
-          className="h-15 resize-none items-center rounded-full pr-16 pt-4"
+          className="h-14 resize-none items-center rounded-full pt-3 pr-16"
           autoFocus
         />
 
@@ -40,7 +40,7 @@ const ChatInput = ({ onSendMessage }: props) => {
           onClick={sendMessage}
           aria-label="Send message"
           disabled={!message.trim()}
-          className="z-1 absolute right-2 top-1/2 -translate-y-[56%]"
+          className="absolute top-1/2 right-1 z-1 -translate-y-[56%]"
         >
           <Send className="h-6 w-6" />
         </IconButton>
