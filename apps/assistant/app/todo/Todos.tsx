@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Loading, View } from "@zind/ui"
+import { Box, Loading, Text, View } from "@zind/ui"
 import { useTodo } from "./TodoContext"
 import { Todo } from "./Todo"
 
@@ -8,10 +8,14 @@ export const Todos = () => {
   const { todos, loading, view, closeView } = useTodo()
 
   return (
-    <View view={view} onClose={closeView} title="To do">
+    <View view={view} onClose={closeView}>
       {loading && <Loading />}
 
-      <Box className="mx-auto sm:w-md">
+      <Box className="mx-auto px-5 sm:w-md">
+        <Box className="mt-5 mb-10 flex">
+          <Text className="text-lg">To do</Text>
+        </Box>
+
         <Box className="flex flex-col gap-2">
           {todos.map((todo) => (
             <Todo key={todo.id} item={todo} />
