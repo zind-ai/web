@@ -23,7 +23,7 @@ export default [
       prettier: eslintPluginPrettier,
     },
     rules: {
-      "prettier/prettier": ["warn", prettierConfig],
+      // "prettier/prettier": ["warn", prettierConfig],
       "no-console": ["error", { allow: ["error"] }],
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
@@ -36,6 +36,6 @@ export default [
     },
   },
   {
-    ignores: ["**/dist/**", "**/node_modules/**", "**/.next/**"],
+    ignores: ["**/dist/**", "**/node_modules/**", "**/.next/**", "**/out/**"],
   },
 ]
