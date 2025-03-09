@@ -40,9 +40,9 @@ const ChatInput = ({ onSendMessage }: props) => {
           onClick={sendMessage}
           aria-label="Send message"
           disabled={!message.trim()}
-          className="absolute top-1/2 right-1 z-1 -translate-y-[56%]"
+          className="absolute top-1/2 right-1.5 z-1 -translate-y-[57%]"
         >
-          <Send className="h-6 w-6" />
+          <Send className="h-5 w-5" />
         </IconButton>
       </Box>
     </Box>
