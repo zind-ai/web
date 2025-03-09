@@ -8,17 +8,15 @@ export const Todos = () => {
   const { todos, loading, view, closeView } = useTodo()
 
   return (
-    <View view={view} onClose={closeView}>
+    <View view={view} onClose={closeView} title="To do">
       {loading && <Loading />}
 
-      <Box className="mb-10 flex">
-        <Text className="text-lg">To do</Text>
-      </Box>
-
-      <Box className="flex flex-col gap-2">
-        {todos.map((todo) => (
-          <Todo key={todo.id} item={todo} />
-        ))}
+      <Box className="mx-auto sm:w-md">
+        <Box className="flex flex-col gap-2">
+          {todos.map((todo) => (
+            <Todo key={todo.id} item={todo} />
+          ))}
+        </Box>
       </Box>
     </View>
   )

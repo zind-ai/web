@@ -6,6 +6,7 @@ import {
   DialogPanel,
   TransitionChild,
 } from "@headlessui/react"
+import { IconButton } from "../../form/icon-button/IconButton"
 
 interface props extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode
@@ -24,7 +25,7 @@ export const Panel = forwardRef<HTMLDivElement, props>(
       >
         <DialogBackdrop
           transition
-          className="bg-grayscale-725/75 dark:bg-grayscale-725/75 data-closed:opacity-0 fixed inset-0 transition-opacity duration-500 ease-in-out"
+          className="bg-grayscale-725/75 dark:bg-grayscale-725/75 fixed inset-0 transition-opacity duration-500 ease-in-out data-closed:opacity-0"
         />
 
         <div className="fixed inset-0 overflow-hidden">
@@ -32,13 +33,12 @@ export const Panel = forwardRef<HTMLDivElement, props>(
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
               <DialogPanel
                 transition
-                className="data-closed:translate-x-full pointer-events-auto relative w-screen max-w-md transform transition duration-500 ease-in-out sm:duration-700"
+                className="pointer-events-auto relative w-screen max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700"
               >
                 <TransitionChild>
-                  <X
-                    className="text-grayscale-700 dark:text-grayscale-200 absolute right-5 top-5 h-5 w-5 cursor-pointer"
-                    onClick={onHide}
-                  />
+                  <IconButton variant="text" size="sm" onClick={onHide}>
+                    <X className="h-5 w-5" />
+                  </IconButton>
                 </TransitionChild>
                 <div className="bg-grayscale-50 dark:bg-grayscale-700 flex h-full flex-col overflow-y-scroll py-6 shadow-xl">
                   <div className="relative mt-6 flex-1 px-4 sm:px-6">

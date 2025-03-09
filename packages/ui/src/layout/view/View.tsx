@@ -1,42 +1,52 @@
-import { forwardRef, Fragment, ReactNode } from "react"
+import { forwardRef, ReactNode } from "react"
+import { Dialog, DialogPanel } from "@headlessui/react"
 import { X } from "lucide-react"
-import { Transition } from "@headlessui/react"
+import { IconButton } from "../../form/icon-button/IconButton"
+import { Text } from "../../typography/text/Text"
 
-interface ViewProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ViewProps {
   children: ReactNode
   view: boolean
   onClose: (event: React.MouseEvent) => void
+  title: string
 }
 
 export const View = forwardRef<HTMLDivElement, ViewProps>(
   ({ children, view, onClose }, ref) => {
     return (
-      <Transition
-        as={Fragment}
-        show={view}
-        enter="transition-transform transition-opacity duration-300 ease-out"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition-transform transition-opacity duration-300 ease-in"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
+      <Dialog
+        as="div"
+        ref={ref}
+        open={view}
+        onClose={() => onClose}
+        className="relative z-10 focus:outline-none"
+        aria-label="view"
       >
-        <div ref={ref} className="fixed right-10 top-10 z-10">
-          <div
-            className="bg-grayscale-150 dark:bg-grayscale-700 w-md rounded-2xl p-5 shadow-xl"
-            role="application"
+        <div className="fixed inset-0 z-10 h-screen w-screen">
+          <DialogPanel
+            transition
+            className="relative h-full w-full overflow-y-auto bg-white/5 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
           >
-            <div className="absolute right-3 top-3">
-              <X
-                className="text-grayscale-700 dark:text-grayscale-200 h-5 w-5 cursor-pointer"
+            <div
+              className="sticky top-0 z-10 flex items-center justify-between p-3"
+              aria-label="view header"
+            >
+              <Text className="text-lg" aria-label="view title">
+                To do
+              </Text>
+              <IconButton
+                variant="text"
+                size="sm"
                 onClick={onClose}
-              />
+                aria-label="view close button"
+              >
+                <X className="h-6 w-6" />
+              </IconButton>
             </div>
-
             <div>{children}</div>
-          </div>
+          </DialogPanel>
         </div>
-      </Transition>
+      </Dialog>
     )
   }
 )
