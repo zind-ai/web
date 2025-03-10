@@ -3,8 +3,8 @@ import { todo } from "../api/todo/types"
 export const handleTodoAction = (
   action: string,
   actions: {
-    openView: () => void
-    closeView: () => void
+    openTodos: () => void
+    closeTodos: () => void
     addTodo: ({ name, description, start }: Omit<todo, "user_id">) => void
     removeTodo: (args: { id: string }) => void
   }
@@ -24,12 +24,12 @@ export const handleTodoAction = (
   // 2. process
   if (parsed_action?.valid && parsed_action?.name) {
     switch (parsed_action.name) {
-      case "openView":
-        actions.openView()
+      case "openTodos":
+        actions.openTodos()
         return true
 
-      case "closeView":
-        actions.closeView()
+      case "closeTodos":
+        actions.closeTodos()
         return true
 
       case "addTodo":

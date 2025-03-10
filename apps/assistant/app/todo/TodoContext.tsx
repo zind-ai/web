@@ -7,19 +7,20 @@ import {
   ReactNode,
   useEffect,
 } from "react"
-import { useToast, useView } from "@zind/ui"
+import { useRouter } from "next/navigation"
+import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
 import { user_id } from "@/app/global/login/user"
 import { get_response, todo } from "../api/todo/types"
 
 interface TodoContextProps {
   todos: todo[]
-  loading: boolean
+  addingTodo: boolean
+  gettingTodos: boolean
+  removingTodo: boolean
 
-  view: boolean
-  openView: () => void
-  closeView: () => void
-
+  openTodos: () => void
+  closeTodos: () => void
   addTodo: (newTodo: Omit<todo, "user_id">) => void
   removeTodo: ({ id }: { id: string }) => void
 }
@@ -27,26 +28,37 @@ interface TodoContextProps {
 const TodoContext = createContext<TodoContextProps | undefined>(undefined)
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
+  const router = useRouter()
+
   const [todos, setTodos] = useState<todo[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [addingTodo, setAddingTodo] = useState<boolean>(false)
+  const [gettingTodos, setGettingTodos] = useState<boolean>(false)
+  const [removingTodo, setRemovingTodo] = useState<boolean>(false)
 
   const { showToast } = useToast()
-  const { openView, closeView, view } = useView()
+
+  const openTodos = () => {
+    router.push(`?tab=todo`, { scroll: false })
+  }
+
+  const closeTodos = () => {
+    router.push(`?tab=chat`, { scroll: false })
+  }
 
   const getTodos = async () => {
     if (!user_id) return
 
-    setLoading(true)
+    setGettingTodos(true)
 
     callAPI({
       url: `/api/todo?user_id=${user_id}`,
       method: "get",
       onSuccess: (data: get_response) => {
         setTodos(data.todos)
-        setLoading(false)
+        setGettingTodos(false)
       },
       onError: (error) => {
-        setLoading(false)
+        setGettingTodos(false)
         showToast(error.message)
       },
     })
@@ -59,7 +71,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const addTodo = (newTodo: Omit<todo, "user_id">) => {
     if (!newTodo) return
 
-    setLoading(true)
+    setAddingTodo(true)
 
     callAPI({
       url: "/api/todo",
@@ -72,14 +84,11 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
         user_id: user_id,
       },
       onSuccess: async () => {
-        if (!view) {
-          openView()
-        }
         await getTodos()
-        setLoading(false)
+        setAddingTodo(false)
       },
       onError: (error) => {
-        setLoading(false)
+        setAddingTodo(false)
         showToast(error.message)
       },
     })
@@ -88,21 +97,17 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const removeTodo = async ({ id }: { id: string }) => {
     if (!id) return
 
-    if (!view) {
-      open()
-    }
-
-    setLoading(true)
+    setRemovingTodo(true)
 
     callAPI({
       url: `/api/todo?user_id=${user_id}&id=${id}`,
       method: "delete",
       onSuccess: async () => {
         await getTodos()
-        setLoading(false)
+        setRemovingTodo(false)
       },
       onError: (error) => {
-        setLoading(false)
+        setRemovingTodo(false)
         showToast(error.message)
       },
     })
@@ -112,12 +117,11 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     <TodoContext.Provider
       value={{
         todos,
-        loading,
-
-        view,
-        openView,
-        closeView,
-
+        addingTodo,
+        removingTodo,
+        gettingTodos,
+        openTodos,
+        closeTodos,
         addTodo,
         removeTodo,
       }}

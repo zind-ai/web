@@ -1,27 +1,24 @@
 "use client"
 
-import { Box, Loading, Text, View } from "@zind/ui"
+import { useEffect } from "react"
+import { Box, Loading } from "@zind/ui"
 import { useTodo } from "./TodoContext"
 import { Todo } from "./Todo"
 
 export const Todos = () => {
-  const { todos, loading, view, closeView } = useTodo()
+  const { todos, gettingTodos } = useTodo()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
+
+  if (gettingTodos) return <Loading />
 
   return (
-    <View view={view} onClose={closeView}>
-      {loading && <Loading />}
-
-      <Box className="mx-auto px-5 sm:w-md">
-        <Box className="mt-5 mb-10 flex">
-          <Text className="text-lg">To do</Text>
-        </Box>
-
-        <Box className="flex flex-col gap-2">
-          {todos.map((todo) => (
-            <Todo key={todo.id} item={todo} />
-          ))}
-        </Box>
-      </Box>
-    </View>
+    <Box className="animate-fade-in-scale flex flex-col gap-2">
+      {todos.map((todo) => (
+        <Todo key={todo.id} item={todo} />
+      ))}
+    </Box>
   )
 }

@@ -4,9 +4,10 @@ import { Box, IconButton, Textarea } from "@zind/ui"
 
 interface props {
   onSendMessage: (message: string) => void
+  addingChat: boolean
 }
 
-const ChatInput = ({ onSendMessage }: props) => {
+const ChatInput = ({ onSendMessage, addingChat }: props) => {
   const [message, setMessage] = useState("")
 
   const sendMessage = () => {
@@ -39,7 +40,7 @@ const ChatInput = ({ onSendMessage }: props) => {
         <IconButton
           onClick={sendMessage}
           aria-label="Send message"
-          disabled={!message.trim()}
+          disabled={!message.trim() || addingChat}
           className="absolute top-1/2 right-1.5 z-1 -translate-y-[57%]"
         >
           <Send className="h-5 w-5" />

@@ -15,21 +15,23 @@ import { chat, get_response, post_response } from "@/app/api/chats/types"
 interface ChatContextProps {
   chats: chat[]
   addChat: (newChat: chat) => void
-  loading: boolean
+  addingChat: boolean
+  gettingChats: boolean
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined)
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [chats, setChats] = useState<chat[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [addingChat, setAddingChat] = useState<boolean>(false)
+  const [gettingChats, setGettingChats] = useState<boolean>(false)
 
   const { showToast } = useToast()
 
   const addChat = async (newChat: chat) => {
     if (!newChat) return
 
-    setLoading(true)
+    setAddingChat(true)
 
     setChats((prevChats) => [...prevChats, newChat])
 
@@ -45,11 +47,11 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         if (data.chat) {
           setChats((prevChats) => [...prevChats, data.chat as chat])
         }
-        setLoading(false)
+        setAddingChat(false)
       },
       onError(error) {
         showToast(error.message)
-        setLoading(false)
+        setAddingChat(false)
       },
     })
   }
@@ -57,7 +59,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const getChats = () => {
     if (!user_id || chats.length) return
 
-    setLoading(true)
+    setGettingChats(true)
 
     callAPI({
       url: `/api/chats?user_id=${user_id}`,
@@ -70,10 +72,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           return prevChats
         })
 
-        setLoading(false)
+        setGettingChats(false)
       },
       onError: (error) => {
-        setLoading(false)
+        setGettingChats(false)
         showToast(error.message)
       },
     })
@@ -84,7 +86,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   return (
-    <ChatContext.Provider value={{ chats, addChat, loading }}>
+    <ChatContext.Provider value={{ chats, addChat, addingChat, gettingChats }}>
       {children}
     </ChatContext.Provider>
   )

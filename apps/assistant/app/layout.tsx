@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
-import { Box, Provider } from "@zind/ui"
-import { Nav } from "./global/nav/Nav"
+import { Provider } from "@zind/ui"
 import "../style/globals.css"
 
 export const metadata: Metadata = {
@@ -20,10 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className="bg-grayscale dark:bg-grayscale-800 font-sans font-normal">
-        <Provider>
-          <Nav />
-          <Box className="mt-12 flex p-5">{children}</Box>
-        </Provider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   )

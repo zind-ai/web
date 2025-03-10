@@ -1,12 +1,12 @@
 export const actions = [
   {
-    name: "openView",
+    name: "openTodos",
     description:
       "opens or shows my todo list. eg. What have I got on my todo list today?",
     parameters: [],
   },
   {
-    name: "closeView",
+    name: "closeTodos",
     description: "closes or hides my todo list",
     parameters: [],
   },

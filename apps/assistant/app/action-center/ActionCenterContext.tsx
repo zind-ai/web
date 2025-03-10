@@ -21,7 +21,7 @@ export const ActionCenterProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
 
-  const { todos, openView, closeView, addTodo, removeTodo } = useTodo()
+  const { todos, openTodos, closeTodos, addTodo, removeTodo } = useTodo()
 
   const action = async (message: string) => {
     if (!message) return false
@@ -52,8 +52,8 @@ export const ActionCenterProvider = ({ children }: { children: ReactNode }) => {
 
     if (json_response) {
       return handleTodoAction(json_response, {
-        openView,
-        closeView,
+        openTodos,
+        closeTodos,
         addTodo,
         removeTodo,
       })
