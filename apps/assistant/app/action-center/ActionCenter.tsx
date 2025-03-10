@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 import { v4 as uuid } from "uuid"
-import { Box, Text } from "@zind/ui"
+import { Box } from "@zind/ui"
 import { openai_chat_role } from "@zind/sdk"
 import { user_id } from "@/app/global/login/user"
 import { useActionCenter } from "../action-center/ActionCenterContext"
