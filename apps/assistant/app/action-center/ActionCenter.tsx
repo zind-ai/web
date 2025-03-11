@@ -32,7 +32,7 @@ export const ActionCenter = () => {
     }
   }, [tab])
 
-  const { addChat, addingChat, memories } = useChat()
+  const { addChat, addingChat } = useChat()
   const { action } = useActionCenter()
 
   const sendMessage = async (message: string) => {
