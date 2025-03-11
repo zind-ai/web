@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { v4 as uuid } from "uuid"
 import { Box } from "@zind/ui"
@@ -11,7 +12,6 @@ import ChatInput from "../chat/ChatInput"
 import { Chats } from "../chat/Chats"
 import { Header } from "./action-center/Header"
 import { Todos } from "../todo/Todos"
-import { useEffect, useState } from "react"
 
 const tabs = [
   { id: "chat", title: "Chat", component: <Chats /> },
@@ -20,7 +20,7 @@ const tabs = [
 
 export const ActionCenter = () => {
   const searchParams = useSearchParams()
-  const tab = searchParams.get("tab")
+  const tab = searchParams.get("on")
   const validTabs = tabs.map((t) => t.id)
 
   const [activeTab, setActiveTab] = useState(tabs[0].id)
@@ -32,7 +32,7 @@ export const ActionCenter = () => {
     }
   }, [tab])
 
-  const { addChat, addingChat } = useChat()
+  const { addChat, addingChat, memories } = useChat()
   const { action } = useActionCenter()
 
   const sendMessage = async (message: string) => {

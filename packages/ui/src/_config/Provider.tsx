@@ -7,7 +7,7 @@ import React, {
   useState,
   ReactNode,
 } from "react"
-import { ToastProvider } from "../feedback/toast/ToastContext"
+import { ToastProvider } from "../data-display/toast/ToastContext"
 
 type Theme = "light" | "dark" | "system"
 

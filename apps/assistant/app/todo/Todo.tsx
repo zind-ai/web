@@ -15,7 +15,7 @@ export const Todo = ({ item }: props) => {
     <Box
       className={twMerge(
         "flex flex-col gap-1 rounded-2xl p-3",
-        highlight && "dark:bg-grayscale-600 bg-grayscale-225"
+        highlight && "dark:bg-grayscale-725 bg-grayscale-100"
       )}
     >
       <Box className="flex flex-row justify-between">

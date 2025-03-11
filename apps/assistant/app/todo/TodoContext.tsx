@@ -38,11 +38,11 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const { showToast } = useToast()
 
   const openTodos = () => {
-    router.push(`?tab=todo`, { scroll: false })
+    router.push(`?on=todo`, { scroll: false })
   }
 
   const closeTodos = () => {
-    router.push(`?tab=chat`, { scroll: false })
+    router.push(`?on=chat`, { scroll: false })
   }
 
   const getTodos = async () => {

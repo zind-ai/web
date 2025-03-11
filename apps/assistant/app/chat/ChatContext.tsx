@@ -1,28 +1,30 @@
 "use client"
 
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react"
+import { createContext, useContext, useState, ReactNode } from "react"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
 import { user_id } from "@/app/global/login/user"
-import { chat, get_response, post_response } from "@/app/api/chats/types"
+import {
+  chat,
+  get_response,
+  memories,
+  post_response,
+} from "@/app/api/chats/types"
 
 interface ChatContextProps {
   chats: chat[]
+  memories: memories
+  getChats: () => void
+  gettingChats: boolean
   addChat: (newChat: chat) => void
   addingChat: boolean
-  gettingChats: boolean
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined)
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [chats, setChats] = useState<chat[]>([])
+  const [memories, setMemories] = useState<memories>(null)
   const [addingChat, setAddingChat] = useState<boolean>(false)
   const [gettingChats, setGettingChats] = useState<boolean>(false)
 
@@ -47,6 +49,11 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         if (data.chat) {
           setChats((prevChats) => [...prevChats, data.chat as chat])
         }
+
+        if (data.memories) {
+          setMemories(data.memories)
+        }
+
         setAddingChat(false)
       },
       onError(error) {
@@ -81,12 +88,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  useEffect(() => {
-    getChats()
-  }, [])
-
   return (
-    <ChatContext.Provider value={{ chats, addChat, addingChat, gettingChats }}>
+    <ChatContext.Provider
+      value={{ chats, memories, addChat, getChats, addingChat, gettingChats }}
+    >
       {children}
     </ChatContext.Provider>
   )

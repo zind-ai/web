@@ -82,7 +82,7 @@ export const retrieveMemories = async (user_message: string) => {
         (memory) =>
           `${format(memory.created_at, "MMM ddth, yyyy hh:mm")}: ${memory.memory}`
       )
-      .join("\n")
+      .join("\n\n")
 
     return `Past memories:\n${pastMemories}`
   }

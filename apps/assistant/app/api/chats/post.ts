@@ -32,9 +32,6 @@ export async function POST(req: Request) {
     const past_memories = (await retrieveMemories(message)) ?? ""
     const context = `${assistant_instructions}\n\n${recent_chats}\n\n${past_memories}`
 
-    /* eslint-disable no-console */
-    console.log(`\n${context}\n`)
-
     // 2. talk to the assistant
     await callAPI({
       url: endpoint_url,
@@ -82,6 +79,7 @@ export async function POST(req: Request) {
       const response = new Response(
         JSON.stringify({
           chat: assistant_chat,
+          memories: past_memories,
           error: null,
         }),
         {
@@ -100,7 +98,11 @@ export async function POST(req: Request) {
       return response
     } else {
       return new Response(
-        JSON.stringify({ chat: null, error: "No assistant response" }),
+        JSON.stringify({
+          chat: null,
+          memories: null,
+          error: "No assistant response",
+        }),
         {
           status: 502,
         }
@@ -109,8 +111,11 @@ export async function POST(req: Request) {
   } catch (error) {
     const message = catchErrorMessage(error)
 
-    return new Response(JSON.stringify({ chat: null, error: message }), {
-      status: 500,
-    })
+    return new Response(
+      JSON.stringify({ chat: null, memories: null, error: message }),
+      {
+        status: 500,
+      }
+    )
   }
 }
