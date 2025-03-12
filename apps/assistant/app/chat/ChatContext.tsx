@@ -1,6 +1,12 @@
 "use client"
 
-import { createContext, useContext, useState, ReactNode } from "react"
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
 import { user_id } from "@/app/global/login/user"
@@ -29,6 +35,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [gettingChats, setGettingChats] = useState<boolean>(false)
 
   const { showToast } = useToast()
+
+  useEffect(() => {
+    getChats()
+  }, [])
 
   const addChat = async (newChat: chat) => {
     if (!newChat) return
@@ -89,18 +99,18 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <ChatContext.Provider
+    <ChatContext
       value={{ chats, memories, addChat, getChats, addingChat, gettingChats }}
     >
       {children}
-    </ChatContext.Provider>
+    </ChatContext>
   )
 }
 
 export function useChat() {
   const context = useContext(ChatContext)
   if (!context) {
-    throw new Error("useChat must be used within a ChatProvider")
+    throw new Error("useChat must be used within ChatProvider")
   }
   return context
 }

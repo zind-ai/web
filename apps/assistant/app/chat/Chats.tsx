@@ -1,18 +1,15 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { openai_chat_role } from "@zind/sdk"
 import { Box, Loading } from "@zind/ui"
 import { useChat } from "./ChatContext"
 import Chat from "./Chat"
-import { openai_chat_role } from "@zind/sdk"
+import ChatInput from "./ChatInput"
 
 export const Chats = () => {
   const chatEnd = useRef<HTMLDivElement>(null)
-  const { chats, getChats, gettingChats } = useChat()
-
-  useEffect(() => {
-    getChats()
-  }, [])
+  const { chats, gettingChats } = useChat()
 
   useEffect(() => {
     chatEnd.current?.scrollIntoView({ behavior: "smooth" })
@@ -25,16 +22,19 @@ export const Chats = () => {
   if (gettingChats) return <Loading />
 
   return (
-    <Box className="animate-fade-in-scale items-stretch space-y-3 pb-30">
-      {chats.map((chat) => (
-        <Chat
-          key={chat.id}
-          chat={chat}
-          showMemory={chat.id === lastAssistantChatId}
-        />
-      ))}
+    <Box className="mx-auto mt-15 h-screen w-full p-5 md:w-2xl">
+      <Box className="animate-fade-in-scale items-stretch space-y-3 pb-30">
+        {chats.map((chat) => (
+          <Chat
+            key={chat.id}
+            chat={chat}
+            showMemory={chat.id === lastAssistantChatId}
+          />
+        ))}
 
-      <Box ref={chatEnd} />
+        <Box ref={chatEnd} />
+      </Box>
+      <ChatInput />
     </Box>
   )
 }

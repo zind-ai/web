@@ -1,20 +1,27 @@
 import { useState } from "react"
+import { v4 as uuid } from "uuid"
 import { Send } from "lucide-react"
 import { Box, IconButton, Textarea } from "@zind/ui"
+import { openai_chat_role } from "@zind/sdk"
+import { useChat } from "./ChatContext"
+import { user_id } from "../global/login/user"
 
-interface props {
-  onSendMessage: (message: string) => void
-  addingChat: boolean
-}
-
-const ChatInput = ({ onSendMessage, addingChat }: props) => {
+const ChatInput = () => {
   const [message, setMessage] = useState("")
+  const { addChat, addingChat } = useChat()
 
   const sendMessage = () => {
-    if (message.trim()) {
-      onSendMessage(message)
-      setMessage("")
-    }
+    if (!message.trim()) return
+
+    addChat({
+      id: uuid(),
+      message: message,
+      role: openai_chat_role.user,
+      user_id: user_id,
+      created_at: new Date().toString(),
+    })
+
+    setMessage("")
   }
 
   const handleKeyDown = (event: React.KeyboardEvent) => {

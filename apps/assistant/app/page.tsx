@@ -1,21 +1,15 @@
 import type { Metadata } from "next"
 import { ChatProvider } from "./chat/ChatContext"
-import { TodoProvider } from "./todo/TodoContext"
-import { ActionCenterProvider } from "./action-center/ActionCenterContext"
-import { ActionCenter } from "./action-center/ActionCenter"
+import { Chats } from "./chat/Chats"
 
 export const metadata: Metadata = {
   title: "story",
 }
 
-export default function Apps() {
+export default function chat() {
   return (
     <ChatProvider>
-      <TodoProvider>
-        <ActionCenterProvider>
-          <ActionCenter />
-        </ActionCenterProvider>
-      </TodoProvider>
+      <Chats />
     </ChatProvider>
   )
 }

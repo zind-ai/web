@@ -6,7 +6,7 @@ import { chat } from "@/app/api/chats/types"
 import { chatSegments } from "./chat/chatSegments"
 import ChatAssistant from "./chat/ChatAssistant"
 import ChatUser from "./chat/ChatUser"
-import { Memories } from "./chat/Memories"
+import { ChatMemories } from "./chat/ChatMemories"
 
 interface props {
   chat: chat
@@ -36,9 +36,9 @@ const Chat = ({ chat, showMemory }: props) => {
       )}
 
       {chat.role === openai_chat_role.assistant && (
-        <Box className="flex flex-col gap-3">
+        <Box className="flex flex-col gap-1">
           <ChatAssistant chatSegments={segments} />
-          {showMemory && <Memories />}
+          {showMemory && <ChatMemories />}
         </Box>
       )}
     </Box>
