@@ -1,14 +1,15 @@
 import React, { forwardRef, ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
-interface props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   className?: string
   size?: "sm" | "base" | "lg"
   variant?: "text" | "contained" | "outlined"
 }
 
-export const IconButton = forwardRef<HTMLButtonElement, props>(
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     { children, size = "base", variant = "contained", className, ...props },
     ref

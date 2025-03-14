@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
-import { Provider } from "@zind/ui"
-import "../style/globals.css"
+import { UserProvider } from "@auth0/nextjs-auth0/client"
+import { UIProvider } from "@zind/ui"
 import { Navbar } from "./nav/Navbar"
+
+import "../style/globals.css"
 
 export const metadata: Metadata = {
   title: "zind",
@@ -19,10 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body className="bg-grayscale dark:bg-grayscale-800 font-sans font-normal">
-        <Navbar />
-        <Provider>{children}</Provider>
-      </body>
+      <UserProvider>
+        <body className="bg-grayscale dark:bg-grayscale-800 font-sans font-normal">
+          <UIProvider>
+            <Navbar />
+            {children}
+          </UIProvider>
+        </body>
+      </UserProvider>
     </html>
   )
 }

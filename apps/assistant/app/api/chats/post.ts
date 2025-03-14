@@ -10,8 +10,6 @@ import { saveMemory } from "./context/saveMemory"
 import { retrieveMemories } from "./context/retrieveMemories"
 
 export async function POST(req: Request) {
-  const supabase = supabase_client()
-
   const { user_id: _user_id, message: _message, chats } = await req.json()
 
   const user_id = trim(_user_id)
@@ -54,6 +52,7 @@ export async function POST(req: Request) {
 
     // 3. save the chat
     if (assistant_response) {
+      const supabase = supabase_client()
       const now = new Date()
 
       const { error, data: lastChats } = await supabase

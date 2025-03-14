@@ -1,5 +1,5 @@
 // config
-export { Provider, useTheme } from "./_config/Provider"
+export { UIProvider, useTheme } from "./_config/Provider"
 
 // layout
 export { Box } from "./layout/box/Box"
@@ -12,6 +12,13 @@ export { Link } from "./typography/link/Link"
 export { Button } from "./form/button/Button"
 export { IconButton } from "./form/icon-button/IconButton"
 export { Textarea } from "./form/textarea/Textarea"
+
+// menu
+export { Dropdown } from "./menu/dropdown/Dropdown"
+export { useDropdown } from "./menu/dropdown/useDropdown"
+
+// media
+export { Image } from "./media/image/Image"
 
 // data display
 export { Code } from "./data-display/code/Code"

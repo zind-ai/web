@@ -26,7 +26,7 @@ export const useTheme = () => {
   return context
 }
 
-export const Provider = ({ children }: { children: ReactNode }) => {
+export const UIProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("system")
 
   useEffect(() => {
