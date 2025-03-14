@@ -1,23 +1,24 @@
 import { useState } from "react"
+import { useUser } from "@auth0/nextjs-auth0/client"
 import { v4 as uuid } from "uuid"
 import { Send } from "lucide-react"
 import { Box, IconButton, Textarea } from "@zind/ui"
 import { openai_chat_role } from "@zind/sdk"
 import { useChat } from "./ChatContext"
-import { user_id } from "../global/login/user"
 
 const ChatInput = () => {
   const [message, setMessage] = useState("")
   const { addChat, addingChat } = useChat()
+  const { user } = useUser()
 
   const sendMessage = () => {
-    if (!message.trim()) return
+    if (!message.trim() || !user?.sub) return
 
     addChat({
       id: uuid(),
       message: message,
       role: openai_chat_role.user,
-      user_id: user_id,
+      user_id: user.sub,
       created_at: new Date().toString(),
     })
 

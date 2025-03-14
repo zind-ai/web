@@ -7,19 +7,14 @@ import {
   ReactNode,
   useEffect,
 } from "react"
+import { useUser } from "@auth0/nextjs-auth0/client"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
-import { user_id } from "@/app/global/login/user"
-import {
-  chat,
-  get_response,
-  memories,
-  post_response,
-} from "@/app/api/chats/types"
+import { chat, get_response, post_response } from "@/app/api/chats/types"
 
 interface ChatContextProps {
   chats: chat[]
-  memories: memories
+  memories: post_response["memories"]
   getChats: () => void
   gettingChats: boolean
   addChat: (newChat: chat) => void
@@ -30,15 +25,18 @@ const ChatContext = createContext<ChatContextProps | undefined>(undefined)
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [chats, setChats] = useState<chat[]>([])
-  const [memories, setMemories] = useState<memories>(null)
+  const [memories, setMemories] = useState<post_response["memories"]>(null)
   const [addingChat, setAddingChat] = useState<boolean>(false)
   const [gettingChats, setGettingChats] = useState<boolean>(false)
 
   const { showToast } = useToast()
 
+  const { user } = useUser()
+  const user_id = user?.sub
+
   useEffect(() => {
     getChats()
-  }, [])
+  }, [user_id])
 
   const addChat = async (newChat: chat) => {
     if (!newChat) return
@@ -74,7 +72,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const getChats = () => {
-    if (!user_id || chats.length) return
+    if (!user_id) return
 
     setGettingChats(true)
 
