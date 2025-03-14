@@ -26,7 +26,7 @@ const Chat = ({ chat, showMemory }: props) => {
       )}
     >
       {chat.role === openai_chat_role.assistant && (
-        <Text as="span" className="mt-2 mr-2 text-2xl">
+        <Text as="span" className="mt-1 mr-2 text-2xl">
           🤖
         </Text>
       )}

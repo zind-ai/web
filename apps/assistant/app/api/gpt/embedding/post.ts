@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const text = trim(_text)
 
     if (!text) {
-      return new Response(JSON.stringify({ error: "No text provided" }), {
+      return new Response(JSON.stringify({ error: "text is required" }), {
         status: 400,
       })
     }

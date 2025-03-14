@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
     if (!prompt || !context) {
       return new Response(
-        JSON.stringify({ error: "No prompt or context provided" }),
+        JSON.stringify({ error: "prompt and context are required" }),
         {
           status: 400,
         }

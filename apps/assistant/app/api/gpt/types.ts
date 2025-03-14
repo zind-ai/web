@@ -1,4 +1,4 @@
-export interface post_response {
+export interface gpt_post_response {
   message: string | null
   error: string | null
 }

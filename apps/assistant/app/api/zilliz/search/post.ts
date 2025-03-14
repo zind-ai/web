@@ -5,25 +5,25 @@ import {
   zilliz_api_key,
   zilliz_api_url,
 } from "../consts"
-import { similar_memories } from "./types"
+import { zilliz_search_similar_memories } from "./types"
 
 export async function POST(req: Request) {
   try {
     const { embedding } = await req.json()
 
     if (!embedding) {
-      return new Response(JSON.stringify({ error: "No embedding provided" }), {
+      return new Response(JSON.stringify({ error: "Embedding is required" }), {
         status: 400,
       })
     }
 
-    let memories: similar_memories["data"] | null = null
+    let memories: zilliz_search_similar_memories["data"] | null = null
 
     if (zilliz_api_url && zilliz_api_key) {
       await callAPI({
         url: `${zilliz_api_url}/entities/search`,
         method: "post",
-        token: zilliz_api_key,
+        headers: { Authorization: `Bearer ${zilliz_api_key}` },
         formData: {
           dbName: db_name,
           collectionName: collection_name,
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
           throw new Error(error.message)
         },
 
-        onSuccess: (data: similar_memories) => {
+        onSuccess: (data: zilliz_search_similar_memories) => {
           memories = data.data
         },
       })

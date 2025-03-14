@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const { data } = await req.json()
 
     if (!data) {
-      return new Response(JSON.stringify({ error: "No data provided" }), {
+      return new Response(JSON.stringify({ error: "data is required" }), {
         status: 400,
       })
     }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       await callAPI({
         url: `${zilliz_api_url}/entities/insert`,
         method: "post",
-        token: zilliz_api_key,
+        headers: { Authorization: `Bearer ${zilliz_api_key}` },
         formData: {
           dbName: db_name,
           collectionName: collection_name,

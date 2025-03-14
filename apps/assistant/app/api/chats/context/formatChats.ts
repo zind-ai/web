@@ -1,8 +1,8 @@
 import { format } from "@zind/time"
 import { chat } from "../types"
 
-export const getRecentChats = (chats: chat[]): string => {
-  if (!chats.length) return ""
+export const formatChats = (chats?: chat[]): string => {
+  if (!chats || !chats.length) return ""
 
   const userMessages = chats
     .reverse()

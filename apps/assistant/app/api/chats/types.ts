@@ -1,3 +1,5 @@
+import { memory } from "../memory/types"
+
 export interface chat {
   id?: string
   user_id: string
@@ -5,8 +7,6 @@ export interface chat {
   role: string
   created_at: string
 }
-
-export type memories = string | null
 
 export interface get_response {
   chats: chat[]
@@ -16,5 +16,5 @@ export interface get_response {
 export interface post_response {
   chat: chat | null
   error: string | null
-  memories: memories
+  memories: memory[] | null
 }

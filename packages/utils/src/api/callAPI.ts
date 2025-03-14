@@ -5,7 +5,7 @@ interface Props<T> {
   url: string
   method: Method
   formData?: Record<string, unknown>
-  token?: string
+  headers?: Record<string, unknown>
   onSuccess?: (data: T) => void
   onError?: (error: { message: string; status?: number }) => void
 }
@@ -14,7 +14,7 @@ export const callAPI = async <T>({
   url,
   method,
   formData,
-  token,
+  headers,
   onSuccess,
   onError,
 }: Props<T>) => {
@@ -24,7 +24,7 @@ export const callAPI = async <T>({
       method,
       headers: {
         "Content-Type": "application/json",
-        ...(token && { Authorization: `Bearer ${token}` }),
+        ...headers,
       },
       data: formData,
     })
