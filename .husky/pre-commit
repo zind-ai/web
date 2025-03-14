@@ -6,4 +6,3 @@ pnpm lint ||
 )
 # If everything passes... Now we can commit
 echo '✅ Linting successful'
-echo ''
