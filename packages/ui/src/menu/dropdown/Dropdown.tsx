@@ -12,7 +12,7 @@ interface DropdownProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
-  ({ children, items, open, onClose, className, ...props }, ref) => {
+  ({ children, items, open, onClose, className, ...props }) => {
     const dropdownRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
