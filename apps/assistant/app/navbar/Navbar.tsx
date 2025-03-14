@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Text } from "@zind/ui"
+import { Box, Text, Button } from "@zind/ui"
 import { NavbarSettings } from "./NavbarSettings"
 import { NavbarDropdown } from "./NavbarDropdown"
 
