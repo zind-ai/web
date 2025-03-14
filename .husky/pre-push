@@ -1,8 +1,5 @@
-# Run Tests
-# pnpm test || ( echo 'Tests failed' false;)
-
-# If everything passes... Now we can commit
-# echo '✅ Tests passed'
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
 # Build packages and apps
 pnpm pnpm build ||
