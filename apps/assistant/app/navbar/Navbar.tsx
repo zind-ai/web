@@ -1,6 +1,5 @@
 "use client"
 
-import { Suspense } from "react"
 import { Box, Text } from "@zind/ui"
 import { NavbarSettings } from "./NavbarSettings"
 import { NavbarDropdown } from "./NavbarDropdown"
@@ -10,7 +9,7 @@ export const Navbar = () => {
     <>
       <Box className="fixed top-0 bg-white/5 px-5 py-1 backdrop-blur-2xl">
         <Box className="mx-auto flex items-center justify-between md:w-2xl md:px-5">
-          <Text as="span" className="text-gradient text-xl font-bold">
+          <Text as="span" className={"text-gradient text-xl font-bold"}>
             Chat
           </Text>
 
@@ -18,9 +17,7 @@ export const Navbar = () => {
         </Box>
       </Box>
 
-      <Suspense fallback={null}>
-        <NavbarSettings />
-      </Suspense>
+      <NavbarSettings />
     </>
   )
 }

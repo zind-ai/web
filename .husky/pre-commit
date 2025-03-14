@@ -2,7 +2,7 @@
 pnpm lint ||
 (
         echo 'Linting failed'
-        false; 
+        exit 1;
 )
 # If everything passes... Now we can commit
 echo '✅ Linting successful'

@@ -16,10 +16,7 @@ export const Link = forwardRef<HTMLAnchorElement, props>(
         ref={ref}
         target={target}
         rel={isExternal ? "noopener noreferrer" : rel}
-        className={twMerge(
-          "text-blue-500 underline dark:text-blue-400",
-          className
-        )}
+        className={twMerge("text-blue-500 dark:text-blue-400", className)}
         {...props}
       >
         {children}

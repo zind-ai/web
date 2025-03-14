@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { UserProvider } from "@auth0/nextjs-auth0/client"
 import { UIProvider } from "@zind/ui"
-import { Navbar } from "./nav/Navbar"
+import { Navbar } from "./navbar/Navbar"
 
 import "../style/globals.css"
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "zind",
   description: "",
   icons: {
-    icon: "/favicon-story.ico",
+    icon: "/assets/favicon.ico",
   },
 }
 

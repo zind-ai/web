@@ -11,8 +11,8 @@ interface DropdownProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClose: () => void
 }
 
-export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
-  ({ children, items, open, onClose }) => {
+export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
+  ({ children, items, open, onClose }, ref) => {
     const dropdownRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -34,7 +34,10 @@ export const Dropdown = forwardRef<HTMLElement, DropdownProps>(
       <Box className="relative inline-block w-auto text-left" ref={dropdownRef}>
         {children}
         {open && (
-          <Box className="bg-grayscale-125 dark:bg-grayscale-725 absolute right-0 mt-2 w-48 rounded-lg shadow-lg">
+          <Box
+            ref={ref}
+            className="bg-grayscale-125 dark:bg-grayscale-725 absolute right-0 mt-2 w-48 rounded-lg shadow-lg"
+          >
             <ul className="flex flex-col gap-2 py-2">
               {items.map((item, index) => (
                 <li key={index} className="px-2">

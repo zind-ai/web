@@ -31,27 +31,26 @@ export const NavbarDropdown = () => {
     >
       Settings
     </Button>,
-    <Link href="/api/auth/logout" className="no-underline" target="_self">
+    <Link href="/api/auth/logout" target="_self">
       <Button className="w-full justify-start rounded-lg" variant="text">
         Log out
       </Button>
     </Link>,
   ]
 
-  if (!user)
-    return (
-      <Link href="/api/auth/login" target="_self" className="no-underline">
-        <Button variant="text">Log in</Button>
-      </Link>
-    )
-
   return (
     <Dropdown open={dropdown} onClose={closeDropdown} items={items}>
-      <IconButton variant="text" onClick={toggleDropdown} size="sm">
-        {user.picture ? (
+      <IconButton
+        variant="text"
+        onClick={toggleDropdown}
+        size="sm"
+        color="lighter"
+        className="p-1"
+      >
+        {user?.picture ? (
           <Image src={user.picture} className="h-8 rounded-full" />
         ) : (
-          <UserCircle className="h-6 w-6" />
+          <UserCircle className="h-8 w-8" />
         )}
       </IconButton>
     </Dropdown>

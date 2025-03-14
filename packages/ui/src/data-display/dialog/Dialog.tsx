@@ -1,3 +1,5 @@
+"use client"
+
 import { forwardRef, ReactNode } from "react"
 import { X } from "lucide-react"
 import { twMerge } from "tailwind-merge"
@@ -7,7 +9,7 @@ import { Box } from "../../layout/box/Box"
 interface DialogProps {
   children: ReactNode
   open: boolean
-  onClose: (event: React.MouseEvent) => void
+  onClose: () => void
   overlay?: boolean
 }
 
@@ -17,16 +19,14 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
     return (
       <Box
+        ref={ref}
         className={twMerge(
           "fixed inset-0 z-20 flex items-center justify-center p-5",
           overlay ? "" : "pointer-events-none"
         )}
         aria-label="dialog"
       >
-        <Box
-          ref={ref}
-          className="animate-fade-in-scale pointer-events-auto relative w-full max-w-lg rounded-2xl bg-white/5 shadow-lg backdrop-blur-2xl"
-        >
+        <Box className="animate-fade-in-scale pointer-events-auto relative w-full max-w-lg rounded-2xl bg-white/5 shadow-lg backdrop-blur-2xl">
           <Box className="absolute top-3 right-3 w-auto">
             <IconButton
               variant="contained"

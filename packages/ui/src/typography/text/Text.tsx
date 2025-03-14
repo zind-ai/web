@@ -5,12 +5,13 @@ type TextTags = "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5"
 
 type props<T extends TextTags> = React.HTMLAttributes<HTMLElement> & {
   as?: T
-  className?: string
   children: ReactNode
+  className?: string
+  color?: "base" | "light" | "lighter" | "lightest"
 }
 
 export const Text = forwardRef<HTMLElement, props<TextTags>>(
-  ({ as = "p", children, className, ...props }, ref) => {
+  ({ as = "p", children, color = "base", className, ...props }, ref) => {
     const Component = as
 
     return (
@@ -18,7 +19,14 @@ export const Text = forwardRef<HTMLElement, props<TextTags>>(
         // @ts-ignore
         ref={ref}
         className={twMerge(
-          "text-grayscale-700 dark:text-grayscale-200 text-lg",
+          "text-lg",
+
+          // color
+          color === "base" && "text-grayscale-700 dark:text-grayscale-200",
+          color === "light" && "text-grayscale-500 dark:text-grayscale-300",
+          color === "lighter" && "text-grayscale-400 dark:text-grayscale-400",
+          color === "lightest" && "text-grayscale-300 dark:text-grayscale-500",
+
           className
         )}
         {...props}
