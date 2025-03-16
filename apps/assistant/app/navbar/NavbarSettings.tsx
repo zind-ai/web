@@ -17,13 +17,13 @@ export const NavbarSettings = () => {
     }
   }, [navItem])
 
-  const closeSettings = () => {
+  const close = () => {
     router.push("/", { scroll: false })
     closeDialog()
   }
 
   return (
-    <Dialog open={dialog} onClose={closeSettings} overlay={true}>
+    <Dialog open={dialog} onClose={close} overlay={true}>
       <Box className="flex flex-col gap-5 p-5">
         <Text as="h2" className="text-xl font-medium">
           Settings

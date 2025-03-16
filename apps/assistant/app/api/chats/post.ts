@@ -7,17 +7,22 @@ import { memory_search_endpoint_url } from "../memory/search/consts"
 import { memory_endpoint_url } from "../memory/consts"
 import { memory } from "../memory/types"
 import { formatChats } from "./context/formatChats"
-import { assistant_instructions } from "./context/assistant"
 import { chats_table } from "./consts"
 import { chat } from "./types"
 
 export async function POST(req: Request) {
   try {
     const cookies = req.headers.get("cookie")
-    const { user_id: _user_id, message: _message, chats } = await req.json()
+    const {
+      user_id: _user_id,
+      message: _message,
+      chats,
+      assistant_instructions: _assistant_instructions,
+    } = await req.json()
 
     const user_id = trim(_user_id)
     const message = trim(_message)
+    const assistant_instructions = trim(_assistant_instructions)
 
     if (!user_id || !message) {
       return new Response(
@@ -52,7 +57,7 @@ export async function POST(req: Request) {
     })
 
     const past_memories = formatMemories(memories)
-    const context = `${assistant_instructions}\n\n${recent_chats}\n\n${past_memories}`
+    const context = `Instructions:\n${assistant_instructions}\n\n${recent_chats}\n\n${past_memories}`
 
     // 2. talk to the assistant
     let assistant_response = {}

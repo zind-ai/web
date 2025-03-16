@@ -1,42 +1,33 @@
 import { supabase_client } from "@zind/sdk"
 import { catchErrorMessage, trim } from "@zind/utils"
+import { assistant_table } from "./consts"
 
-import { todos_table } from "./consts"
-
-export async function POST(req: Request) {
+export async function PATCH(req: Request) {
   try {
     const {
+      id: _id,
       name: _name,
-      description: _description,
-      start,
-      user_id: _user_id,
-      recurrence: _recurrence,
+      instructions: _instructions,
     } = await req.json()
 
+    const id = trim(_id)
     const name = trim(_name)
-    const description = trim(_description)
-    const recurrence = trim(_recurrence)
-    const user_id = trim(_user_id)
+    const instructions = trim(_instructions)
 
-    if (!name || !user_id || !start) {
+    if (!id || !name || !instructions) {
       return new Response(
         JSON.stringify({
-          error: "user_id, name and description fields required",
+          error: "id, name and instructions are required",
         }),
         { status: 400 }
       )
     }
 
     const supabase = supabase_client()
-    const query = supabase.from(todos_table).insert([
-      {
-        name: name,
-        description: description,
-        start: start,
-        recurrence: recurrence,
-        user_id: user_id,
-      },
-    ])
+    const query = supabase
+      .from(assistant_table)
+      .update({ name, instructions })
+      .eq("id", id)
 
     const { error } = await query
     if (error) throw error

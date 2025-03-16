@@ -55,17 +55,6 @@
   --color-grayscale-950: oklch(0.145 0 0);
   --color-grayscale-975: oklch(0.115 0 0);
 
-  --gradient-text: linear-gradient(
-    to right,
-    var(--color-blue-600),
-    var(--color-rose-600)
-  );
-  --gradient-text-dark: linear-gradient(
-    to right,
-    var(--color-blue-500),
-    var(--color-rose-400)
-  );
-
   --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
   @keyframes fade-in-scale {
     0% {
@@ -84,5 +73,13 @@
 
   @variant dark {
     @apply bg-gradient-to-r from-blue-500 to-rose-400 bg-clip-text text-transparent;
+  }
+}
+
+.bg-gradient {
+  @apply bg-gradient-to-r from-blue-600 to-rose-600;
+
+  @variant dark {
+    @apply bg-gradient-to-r from-blue-500 to-rose-400;
   }
 }

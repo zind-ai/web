@@ -1,9 +1,9 @@
 "use client"
 
-import { Suspense } from "react"
 import { Box, Text } from "@zind/ui"
 import { NavbarSettings } from "./NavbarSettings"
 import { NavbarDropdown } from "./NavbarDropdown"
+import { AssistantProfile } from "../assistant/AssistantProfile"
 
 export const Navbar = () => {
   return (
@@ -18,9 +18,8 @@ export const Navbar = () => {
         </Box>
       </Box>
 
-      <Suspense fallback={null}>
-        <NavbarSettings />
-      </Suspense>
+      <AssistantProfile />
+      <NavbarSettings />
     </>
   )
 }

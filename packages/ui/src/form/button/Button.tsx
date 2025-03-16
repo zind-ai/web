@@ -1,5 +1,6 @@
 import React, { forwardRef, ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
+import { LoadingIcon } from "../../data-display/loading/LoadingIcon"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -7,6 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "sm" | "base" | "lg"
   variant?: "text" | "contained" | "outlined"
   color?: "base" | "light" | "lighter" | "lightest"
+  loading?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -16,6 +18,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "base",
       variant = "contained",
       color = "base",
+      loading = false,
       className,
       ...props
     },
@@ -55,6 +58,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
+        {loading && <LoadingIcon className="mr-2" />}
         {children}
       </button>
     )

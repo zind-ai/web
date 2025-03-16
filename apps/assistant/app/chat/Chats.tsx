@@ -19,7 +19,7 @@ export const Chats = () => {
     .filter((chat) => chat.role === openai_chat_role.assistant)
     .pop()?.id
 
-  if (gettingChats) return <Loading />
+  if (gettingChats.loading) return <Loading />
 
   return (
     <Box className="mx-auto mt-15 h-screen w-full p-5 md:w-2xl">

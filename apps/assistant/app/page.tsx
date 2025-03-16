@@ -3,7 +3,7 @@ import { ChatProvider } from "./chat/ChatContext"
 import { Chats } from "./chat/Chats"
 
 export const metadata: Metadata = {
-  title: "story",
+  title: "Chat",
 }
 
 export default function chat() {
