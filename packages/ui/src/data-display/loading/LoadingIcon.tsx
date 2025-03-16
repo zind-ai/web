@@ -5,11 +5,10 @@ interface LoadingIconProps {
   className?: string
 }
 
-export const LoadingIcon = forwardRef<SVGAElement, LoadingIconProps>(
+export const LoadingIcon = forwardRef<SVGSVGElement, LoadingIconProps>(
   ({ className, ...props }, ref) => {
     return (
       <svg
-        // @ts-ignore
         ref={ref}
         aria-hidden="true"
         role="status"
