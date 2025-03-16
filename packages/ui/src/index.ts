@@ -23,6 +23,7 @@ export { Image } from "./media/image/Image"
 // data display
 export { Code } from "./data-display/code/Code"
 export { Loading } from "./data-display/loading/Loading"
+export { LoadingIcon } from "./data-display/loading/LoadingIcon"
 export { useToast } from "./data-display/toast/ToastContext"
 export { Dialog } from "./data-display/dialog/Dialog"
 export { useDialog } from "./data-display/dialog/useDialog"

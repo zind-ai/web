@@ -10,10 +10,13 @@ import {
   useDropdown,
 } from "@zind/ui"
 import { settings } from "./NavbarSettings"
+import { ai } from "../assistant/AssistantProfile"
+import { useAssistant } from "../assistant/AssistantContext"
 
 export const NavbarDropdown = () => {
   const router = useRouter()
   const { user } = useUser()
+  const { assistant } = useAssistant()
 
   const { dropdown, openDropdown, closeDropdown } = useDropdown()
   const toggleDropdown = () => (dropdown ? closeDropdown() : openDropdown())
@@ -23,7 +26,19 @@ export const NavbarDropdown = () => {
     closeDropdown()
   }
 
+  const openAI = () => {
+    router.push(`?on=${ai}`, { scroll: false })
+    closeDropdown()
+  }
+
   const items = [
+    <Button
+      className="bg-gradient w-full justify-start rounded-lg"
+      variant="text"
+      onClick={openAI}
+    >
+      {assistant?.name || "AI"}
+    </Button>,
     <Button
       className="w-full justify-start rounded-lg"
       variant="text"

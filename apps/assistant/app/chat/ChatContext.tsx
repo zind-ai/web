@@ -11,14 +11,17 @@ import { useUser } from "@auth0/nextjs-auth0/client"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
 import { chat, get_response, post_response } from "@/app/api/chats/types"
+import { useAssistant } from "../assistant/AssistantContext"
+
+type action = { loading: boolean; success: boolean }
 
 interface ChatContextProps {
   chats: chat[]
   memories: post_response["memories"]
   getChats: () => void
-  gettingChats: boolean
+  gettingChats: action
   addChat: (newChat: chat) => void
-  addingChat: boolean
+  addingChat: action
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined)
@@ -26,13 +29,20 @@ const ChatContext = createContext<ChatContextProps | undefined>(undefined)
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [chats, setChats] = useState<chat[]>([])
   const [memories, setMemories] = useState<post_response["memories"]>(null)
-  const [addingChat, setAddingChat] = useState<boolean>(false)
-  const [gettingChats, setGettingChats] = useState<boolean>(false)
-
-  const { showToast } = useToast()
+  const [addingChat, setAddingChat] = useState({
+    loading: false,
+    success: false,
+  })
+  const [gettingChats, setGettingChats] = useState({
+    loading: false,
+    success: false,
+  })
 
   const { user } = useUser()
   const user_id = user?.sub
+
+  const { assistant } = useAssistant()
+  const { showToast } = useToast()
 
   useEffect(() => {
     getChats()
@@ -41,9 +51,14 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const addChat = async (newChat: chat) => {
     if (!newChat) return
 
-    setAddingChat(true)
+    setAddingChat((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
 
     setChats((prevChats) => [...prevChats, newChat])
+
+    const assistant_instructions = `You are my (${user?.name}) personal AI, ${assistant?.name}. ${assistant?.instructions}`
 
     await callAPI({
       url: "/api/chats",
@@ -52,6 +67,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         message: newChat.message,
         user_id: newChat.user_id,
         chats: chats,
+        assistant_instructions: assistant_instructions,
       },
       onSuccess: (data: post_response) => {
         if (data.chat) {
@@ -62,11 +78,18 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           setMemories(data.memories)
         }
 
-        setAddingChat(false)
+        setAddingChat((prevState) => ({
+          ...prevState,
+          loading: false,
+          success: true,
+        }))
       },
       onError(error) {
         showToast(error.message)
-        setAddingChat(false)
+        setAddingChat((prevState) => ({
+          ...prevState,
+          loading: false,
+        }))
       },
     })
   }
@@ -74,7 +97,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const getChats = () => {
     if (!user_id) return
 
-    setGettingChats(true)
+    setGettingChats((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
 
     callAPI({
       url: `/api/chats?user_id=${user_id}`,
@@ -87,10 +113,17 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           return prevChats
         })
 
-        setGettingChats(false)
+        setGettingChats((prevState) => ({
+          ...prevState,
+          loading: false,
+          success: true,
+        }))
       },
       onError: (error) => {
-        setGettingChats(false)
+        setGettingChats((prevState) => ({
+          ...prevState,
+          loading: false,
+        }))
         showToast(error.message)
       },
     })

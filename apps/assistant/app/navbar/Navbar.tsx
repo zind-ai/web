@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import { Box, Text } from "@zind/ui"
 import { NavbarSettings } from "./NavbarSettings"
 import { NavbarDropdown } from "./NavbarDropdown"
+import { AssistantProfile } from "../assistant/AssistantProfile"
 
 export const Navbar = () => {
   return (
@@ -17,6 +18,10 @@ export const Navbar = () => {
           <NavbarDropdown />
         </Box>
       </Box>
+
+      <Suspense fallback={null}>
+        <AssistantProfile />
+      </Suspense>
 
       <Suspense fallback={null}>
         <NavbarSettings />

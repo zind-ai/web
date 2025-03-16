@@ -5,11 +5,14 @@ import { Send } from "lucide-react"
 import { Box, IconButton, Textarea } from "@zind/ui"
 import { openai_chat_role } from "@zind/sdk"
 import { useChat } from "./ChatContext"
+import { useAssistant } from "../assistant/AssistantContext"
 
 const ChatInput = () => {
   const [message, setMessage] = useState("")
   const { addChat, addingChat } = useChat()
+
   const { user } = useUser()
+  const { assistant } = useAssistant()
 
   const sendMessage = () => {
     if (!message.trim() || !user?.sub) return
@@ -39,8 +42,8 @@ const ChatInput = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Message story"
-          aria-label="Message story"
+          placeholder={`Message ${assistant?.name ?? "..."}`}
+          aria-label="Message input field"
           className="h-14 resize-none items-center rounded-full pt-3 pr-16"
           autoFocus
         />
@@ -48,7 +51,7 @@ const ChatInput = () => {
         <IconButton
           onClick={sendMessage}
           aria-label="Send message"
-          disabled={!message.trim() || addingChat}
+          disabled={!message.trim() || addingChat.loading}
           className="absolute top-1/2 right-1.5 z-1 -translate-y-[57%]"
         >
           <Send className="h-5 w-5" />
