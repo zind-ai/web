@@ -1,7 +1,3 @@
-<!-- markdownlint-disable first-line-h1 -->
-<!-- markdownlint-disable html -->
-<!-- markdownlint-disable no-duplicate-header -->
-
 <div align="center">
   <img src="https://github.com/zind-ai/web/blob/main/apps/assistant/public/assets/favicon.ico?raw=true" width="50" alt="zind logo" />
 </div>
@@ -23,7 +19,7 @@ Join our community
 2. [Set up project](#2-set-up-project)
 3. [Contribute](#3-contribute)
 
-<br/><br/>
+<br/>
 
 ## 1. Intro
 
@@ -58,7 +54,7 @@ And more importantly, <b>It's truly personal!</b> having a unique
 - look
 - personality
 
-<br/><br/>
+<br/>
 
 ## 2. Set up project
 
@@ -108,7 +104,7 @@ pnpm assistant:dev
 pnpm assistant:dev
 ```
 
-<br/><br/>
+<br/>
 
 ## 3. Contribute
 
