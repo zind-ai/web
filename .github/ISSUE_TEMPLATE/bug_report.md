@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Template to report a bug
+about: Create a bug issue
 title: "[BUG]"
 labels: ''
 assignees: ''
