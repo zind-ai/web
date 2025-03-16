@@ -33,7 +33,7 @@ export const NavbarDropdown = () => {
 
   const items = [
     <Button
-      className="bg-gradient w-full justify-start rounded-lg"
+      className="bg-gradient text-grayscale-100 w-full justify-start rounded-lg"
       variant="text"
       onClick={openAI}
     >
