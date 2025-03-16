@@ -24,5 +24,5 @@ assignees: ''
 **Considerations**
 ?
 
-**Screenshots/videos**
+**Screenshots/Videos**
 Attach
