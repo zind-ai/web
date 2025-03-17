@@ -5,7 +5,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "husky:init": "husky && npx husky-init && husky install",
     "prepare": "husky install",
     "lint": "eslint 'packages/**/*.{ts,tsx}' 'apps/**/*.{ts,tsx}' --fix",
     "format": "prettier --write 'packages/**/*.{ts,tsx,js,jsx,json,md}' 'apps/**/*.{ts,tsx,js,jsx,json,md}'",
