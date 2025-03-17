@@ -1,12 +1,24 @@
 ### Contributing
 
+<a href="https://github.com/zind-ai/web/issues">Report a bug</a> |
+<a href="https://github.com/zind-ai/web/discussions">Discussions</a> |
+<a href="https://discord.gg/nqAEPaTD8g">Discord</a>
+
 <br/><br/>
 
-## Process
+## Process (work on an issue)
 
-1. Check out the <a href="https://github.com/zind-ai/web/issues">issues</a> and pick one that you like
+1. Check out the <a href="https://github.com/zind-ai/web/issues">issues</a>
+
+- Pick one that you like
+- Ask to work on the issue via a comment, a maintainer will assign it to you
+
 2. Fork the repo and create your branch from `main`
-3. Once you are happy with the work you've done, create a `Pull Request`
+3. Once you are happy with the work you've done, create a `pull request`
+4. A maintainer will review your `pull request` and will
+
+- merge it in
+- or give you feedback
 
 <br/>
 
