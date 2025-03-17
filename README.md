@@ -1,9 +1,7 @@
-<div style="text-align: center">
+<div align="center">
   <img src="https://github.com/zind-ai/web/blob/main/apps/assistant/public/assets/favicon.ico?raw=true" width="40" alt="zind" />
-  <h2 style="margin-top: 10px">zind</h2>
+  <h2 style="margin-top: 5px">zind</h2>
 </div>
-
-
 
 <div align="center" style="margin-bottom:5px">
 Join our community
