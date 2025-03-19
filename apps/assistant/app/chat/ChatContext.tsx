@@ -7,21 +7,21 @@ import {
   ReactNode,
   useEffect,
 } from "react"
-import { useUser } from "@auth0/nextjs-auth0/client"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
 import { chat, get_response, post_response } from "@/app/api/chats/types"
 import { useAssistant } from "../assistant/AssistantContext"
+import { useUser } from "../user/UserContext"
 
-type action = { loading: boolean; success: boolean }
+type ActionState = { loading: boolean; success: boolean }
 
 interface ChatContextProps {
   chats: chat[]
   memories: post_response["memories"]
   getChats: () => void
-  gettingChats: action
+  gettingChats: ActionState
   addChat: (newChat: chat) => void
-  addingChat: action
+  addingChat: ActionState
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined)
@@ -39,7 +39,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   })
 
   const { user } = useUser()
-  const user_id = user?.sub
+  const user_id = user?.id
 
   const { assistant } = useAssistant()
   const { showToast } = useToast()

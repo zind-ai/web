@@ -3,13 +3,13 @@ import { X } from "lucide-react"
 import { Text } from "../../typography/text/Text"
 import { IconButton } from "../../form/icon-button/IconButton"
 
-interface props extends React.HTMLAttributes<HTMLDivElement> {
+interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string
   show: boolean
   onHide: (event: React.MouseEvent) => void
 }
 
-export const Toast = forwardRef<HTMLDivElement, props>(
+export const Toast = forwardRef<HTMLDivElement, ToastProps>(
   ({ label, show, onHide }, ref) => {
     return show ? (
       <div ref={ref} className="fixed top-10 right-0 z-10 mx-3 sm:right-10">

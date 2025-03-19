@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation"
 import { UserCircle } from "lucide-react"
-import { useUser } from "@auth0/nextjs-auth0/client"
+
 import {
   Button,
   Dropdown,
@@ -9,9 +9,14 @@ import {
   Link,
   useDropdown,
 } from "@zind/ui"
-import { settings } from "./NavbarSettings"
-import { ai } from "../assistant/AssistantProfile"
+import { useUser } from "../user/UserContext"
 import { useAssistant } from "../assistant/AssistantContext"
+
+export enum NavbarDropdownItem {
+  ai = "ai",
+  user = "user",
+  settings = "settings",
+}
 
 export const NavbarDropdown = () => {
   const router = useRouter()
@@ -21,13 +26,18 @@ export const NavbarDropdown = () => {
   const { dropdown, openDropdown, closeDropdown } = useDropdown()
   const toggleDropdown = () => (dropdown ? closeDropdown() : openDropdown())
 
-  const openSettings = () => {
-    router.push(`?on=${settings}`, { scroll: false })
+  const openAIProfile = () => {
+    router.push(`?on=${NavbarDropdownItem.ai}`, { scroll: false })
     closeDropdown()
   }
 
-  const openAI = () => {
-    router.push(`?on=${ai}`, { scroll: false })
+  const openUserProfile = () => {
+    router.push(`?on=${NavbarDropdownItem.user}`, { scroll: false })
+    closeDropdown()
+  }
+
+  const openSettings = () => {
+    router.push(`?on=${NavbarDropdownItem.settings}`, { scroll: false })
     closeDropdown()
   }
 
@@ -35,9 +45,16 @@ export const NavbarDropdown = () => {
     <Button
       className="bg-gradient text-grayscale-100 w-full justify-start rounded-lg"
       variant="text"
-      onClick={openAI}
+      onClick={openAIProfile}
     >
       {assistant?.name || "AI"}
+    </Button>,
+    <Button
+      className="w-full justify-start rounded-lg"
+      variant="text"
+      onClick={openUserProfile}
+    >
+      {user?.name || "User profile"}
     </Button>,
     <Button
       className="w-full justify-start rounded-lg"
@@ -62,8 +79,8 @@ export const NavbarDropdown = () => {
         color="lighter"
         className="p-1"
       >
-        {user?.picture ? (
-          <Image src={user.picture} className="h-8 rounded-full" />
+        {user?.photo ? (
+          <Image src={user.photo} className="h-8 rounded-full" />
         ) : (
           <UserCircle className="h-8 w-8" />
         )}

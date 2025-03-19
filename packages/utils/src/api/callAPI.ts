@@ -1,7 +1,7 @@
 import axios, { Method, isAxiosError } from "axios"
 import { catchErrorMessage } from "./catchErrorMessage"
 
-interface Props<T> {
+interface CallAPIProps<T> {
   url: string
   method: Method
   formData?: Record<string, unknown>
@@ -17,7 +17,7 @@ export const callAPI = async <T>({
   headers,
   onSuccess,
   onError,
-}: Props<T>) => {
+}: CallAPIProps<T>) => {
   try {
     const response = await axios({
       url,

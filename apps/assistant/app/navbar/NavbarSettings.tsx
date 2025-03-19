@@ -1,8 +1,7 @@
 import { useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Box, Dialog, Text, useDialog } from "@zind/ui"
-
-export const settings = "settings"
+import { NavbarDropdownItem } from "./NavbarDropdown"
 
 export const NavbarSettings = () => {
   const { dialog, openDialog, closeDialog } = useDialog()
@@ -12,7 +11,7 @@ export const NavbarSettings = () => {
   const navItem = searchParams.get("on")
 
   useEffect(() => {
-    if (navItem && navItem === settings) {
+    if (navItem && navItem === NavbarDropdownItem.settings) {
       openDialog()
     }
   }, [navItem])

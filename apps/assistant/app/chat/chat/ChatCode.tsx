@@ -1,11 +1,11 @@
 import React from "react"
 import { Box, Code } from "@zind/ui"
 
-interface props {
+interface ChatCodeProps {
   codeBlock: string[]
 }
 
-const ChatCode = ({ codeBlock }: props) => {
+const ChatCode = ({ codeBlock }: ChatCodeProps) => {
   return (
     <Box className="flex flex-col">
       {codeBlock.map((block, index) => (

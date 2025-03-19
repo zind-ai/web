@@ -1,16 +1,16 @@
 import React from "react"
 import { twMerge } from "tailwind-merge"
 import { Box } from "@zind/ui"
-import { chatSegments } from "./chatSegments"
+import { ChatSegments } from "./chatSegments"
 import ChatHeading from "./ChatHeading"
 import ChatCode from "./ChatCode"
 import ChatText from "./ChatText"
 
-interface props {
-  chatSegments: chatSegments
+interface ChatAssistantProps {
+  chatSegments: ChatSegments
 }
 
-const ChatAssistant = ({ chatSegments }: props) => {
+const ChatAssistant = ({ chatSegments }: ChatAssistantProps) => {
   return (
     <Box>
       {chatSegments.map((segment, index) => {

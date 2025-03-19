@@ -4,6 +4,7 @@ import { Box, Text } from "@zind/ui"
 import { NavbarSettings } from "./NavbarSettings"
 import { NavbarDropdown } from "./NavbarDropdown"
 import { AssistantProfile } from "../assistant/AssistantProfile"
+import { UserProfile } from "../user/UserProfile"
 
 export const Navbar = () => {
   return (
@@ -19,6 +20,7 @@ export const Navbar = () => {
       </Box>
 
       <AssistantProfile />
+      <UserProfile />
       <NavbarSettings />
     </>
   )

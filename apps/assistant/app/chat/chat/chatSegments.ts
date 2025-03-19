@@ -1,4 +1,4 @@
-export type chatSegments = {
+export type ChatSegments = {
   type: "text" | "code"
   content: string
 }[]
@@ -6,7 +6,7 @@ export type chatSegments = {
 export const chatSegments = (message: string) => {
   const lines = message.split("\n")
 
-  const segments: chatSegments = []
+  const segments: ChatSegments = []
   let inCodeBlock = false
   let currentCodeBlock = ""
 

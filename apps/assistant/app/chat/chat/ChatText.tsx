@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, Text } from "@zind/ui"
 
-interface props {
+interface ChatTextProps {
   text: string
 }
 
@@ -15,7 +15,7 @@ const allRegex = new RegExp(
   "g"
 )
 
-const ChatText = ({ text }: props) => {
+const ChatText = ({ text }: ChatTextProps) => {
   const parts = text.split(allRegex)
 
   return (

@@ -3,11 +3,11 @@
 import React, { createContext, useContext, useState, ReactNode } from "react"
 import { Toast } from "./Toast"
 
-interface props {
+interface ToastContextProps {
   showToast: (message: string, duration?: number) => void
 }
 
-const ToastContext = createContext<props | undefined>(undefined)
+const ToastContext = createContext<ToastContextProps | undefined>(undefined)
 
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [message, setMessage] = useState<string | null>(null)

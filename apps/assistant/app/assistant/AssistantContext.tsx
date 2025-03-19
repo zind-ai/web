@@ -8,19 +8,19 @@ import {
   useEffect,
 } from "react"
 import { useSearchParams } from "next/navigation"
-import { useUser } from "@auth0/nextjs-auth0/client"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
 import { assistant, get_response } from "../api/assistant/types"
+import { useUser } from "../user/UserContext"
 
-type action = { loading: boolean; success: boolean }
+type ActionState = { loading: boolean; success: boolean }
 
 interface AssistantContextProps {
-  assistant: assistant | null
-  gettingAssistant: action
+  assistant?: assistant
+  gettingAssistant: ActionState
 
   updateAssistant: (name: string, instructions: string) => void
-  updatingAssistant: action
+  updatingAssistant: ActionState
 }
 
 const AssistantContext = createContext<AssistantContextProps | undefined>(
@@ -28,7 +28,7 @@ const AssistantContext = createContext<AssistantContextProps | undefined>(
 )
 
 export const AssistantProvider = ({ children }: { children: ReactNode }) => {
-  const [assistant, setAssistant] = useState<assistant | null>(null)
+  const [assistant, setAssistant] = useState<assistant | undefined>(undefined)
   const [gettingAssistant, setGettingAssistant] = useState({
     loading: false,
     success: false,
@@ -39,7 +39,7 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
   })
 
   const { user } = useUser()
-  const user_id = user?.sub
+  const user_id = user?.id
 
   const searchParams = useSearchParams()
   const { showToast } = useToast()
@@ -104,8 +104,8 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
       },
       onSuccess: () => {
         setAssistant((prevState) => {
-          if (prevState === null) {
-            return null
+          if (prevState === undefined) {
+            return undefined
           }
 
           return {

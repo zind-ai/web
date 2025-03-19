@@ -8,12 +8,12 @@ import ChatAssistant from "./chat/ChatAssistant"
 import ChatUser from "./chat/ChatUser"
 import { ChatMemories } from "./chat/ChatMemories"
 
-interface props {
+interface ChatProps {
   chat: chat
   showMemory: boolean
 }
 
-const Chat = ({ chat, showMemory }: props) => {
+const Chat = ({ chat, showMemory }: ChatProps) => {
   const segments = chatSegments(chat.message)
 
   return (

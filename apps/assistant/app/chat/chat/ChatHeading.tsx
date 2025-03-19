@@ -1,11 +1,11 @@
 import React from "react"
 import { Text } from "@zind/ui"
 
-interface props {
+interface ChatHeadingProps {
   text: string
 }
 
-const ChatHeading = ({ text }: props) => {
+const ChatHeading = ({ text }: ChatHeadingProps) => {
   const headingLevel = text.startsWith("###")
     ? 3
     : text.startsWith("##")
@@ -17,7 +17,7 @@ const ChatHeading = ({ text }: props) => {
   const cleanedText = text.replace(/^#+/, "").trim()
 
   return (
-    <Text as={`h${headingLevel}`} className="mb-2 mt-4">
+    <Text as={`h${headingLevel}`} className="mt-4 mb-2">
       {cleanedText}
     </Text>
   )
