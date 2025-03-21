@@ -1,6 +1,6 @@
 import React from "react"
 import { twMerge } from "tailwind-merge"
-import { Box, Text } from "@zind/ui"
+import { Box } from "@zind/ui"
 import { openai_chat_role } from "@zind/sdk"
 import { Chat as IChat } from "@/app/api/chats/types"
 import { chatSegments } from "./chat/chatSegments"
@@ -25,12 +25,6 @@ const Chat = ({ chat, showMemory }: ChatProps) => {
           : "w-full place-self-start"
       )}
     >
-      {chat.role === openai_chat_role.assistant && (
-        <Text as="span" className="mt-1 mr-2 text-2xl">
-          🤖
-        </Text>
-      )}
-
       {chat.role === openai_chat_role.user && (
         <ChatUser message={chat.message} />
       )}

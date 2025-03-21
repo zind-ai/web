@@ -5,10 +5,10 @@ import { user_table } from "./consts"
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url)
-    const user_id = trim(url.searchParams.get("user_id"))
+    const user_id = trim(url.searchParams.get("id"))
 
     if (!user_id) {
-      return new Response(JSON.stringify({ error: "user_id is required" }), {
+      return new Response(JSON.stringify({ error: "user id is required" }), {
         status: 400,
       })
     }

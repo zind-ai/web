@@ -1,4 +1,4 @@
-import { Memory } from "../memory/types"
+import { Memory } from "../memories/types"
 
 export interface Chat {
   id?: string

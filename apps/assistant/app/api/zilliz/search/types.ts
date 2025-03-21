@@ -1,4 +1,4 @@
-import { Memory } from "../../memory/types"
+import { Memory } from "../../memories/types"
 
 export interface zilliz_search_similar_memories {
   code: number

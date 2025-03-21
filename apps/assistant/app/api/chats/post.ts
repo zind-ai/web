@@ -3,9 +3,9 @@ import { supabase_client, openai_chat_role } from "@zind/sdk"
 import { gpt_endpoint_url } from "../gpt/consts"
 import { gpt_post_response } from "../gpt/types"
 import { formatMemories } from "./context/formatMemories"
-import { memory_search_endpoint_url } from "../memory/search/consts"
-import { memory_endpoint_url } from "../memory/consts"
-import { Memory } from "../memory/types"
+import { memories_search_endpoint_url } from "../memories/search/consts"
+import { memories_endpoint_url } from "../memories/consts"
+import { Memory } from "../memories/types"
 import { formatChats } from "./context/formatChats"
 import { chats_table } from "./consts"
 import { Chat } from "./types"
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     // search memories
     let memories = undefined
     await callAPI({
-      url: memory_search_endpoint_url,
+      url: memories_search_endpoint_url,
       method: "post",
       formData: {
         user_id: user_id,
@@ -120,7 +120,7 @@ export async function POST(req: Request) {
       const memory_context = `${recent_chats}\n\n${past_memories}`
 
       await callAPI({
-        url: memory_endpoint_url,
+        url: memories_endpoint_url,
         method: "post",
         formData: {
           user_id: user_id,

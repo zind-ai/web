@@ -54,6 +54,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     setAddingChat((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
 
     setChats((prevChats) => [...prevChats, newChat])
@@ -72,6 +73,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       onSuccess: (data: post_response) => {
         if (data.chat) {
           setChats((prevChats) => [...prevChats, data.chat as Chat])
+          setAddingChat((prevState) => ({
+            ...prevState,
+            success: true,
+          }))
         }
 
         if (data.memories) {
@@ -81,7 +86,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         setAddingChat((prevState) => ({
           ...prevState,
           loading: false,
-          success: true,
         }))
       },
       onError(error) {
@@ -100,23 +104,24 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     setGettingChats((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
 
     callAPI({
       url: `/api/chats?user_id=${user_id}`,
       method: "get",
       onSuccess: (data: get_response) => {
-        setChats((prevChats) => {
-          if (prevChats.length === 0) {
-            return data.chats
-          }
-          return prevChats
-        })
+        if (data.chats) {
+          setChats(data.chats)
+          setGettingChats((prevState) => ({
+            ...prevState,
+            success: true,
+          }))
+        }
 
         setGettingChats((prevState) => ({
           ...prevState,
           loading: false,
-          success: true,
         }))
       },
       onError: (error) => {

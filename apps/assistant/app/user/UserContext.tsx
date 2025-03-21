@@ -12,19 +12,20 @@ import { callAPI } from "@zind/utils"
 import { User } from "../api/user/types"
 
 type ActionState = { loading: boolean; success: boolean }
+type UpdateUser = Partial<Pick<User, "name">>
 
 interface UserContextProps {
   user: User | undefined
   getUser: () => void
   gettingUser: ActionState
-  updateUser: (name: string) => void
+  updateUser: (user: UpdateUser) => void
   updatingUser: ActionState
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [userId] = useState("027149fd-2c3e-4475-b51a-1eaf36a98ab7")
+  const userId = "027149fd-2c3e-4475-b51a-1eaf36a98ab7"
   const [user, setUser] = useState<User | undefined>(undefined)
 
   const [gettingUser, setGettingUser] = useState({
@@ -48,14 +49,19 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setGettingUser((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
 
     callAPI({
-      url: `/api/user?user_id=${userId}`,
+      url: `/api/user?id=${userId}`,
       method: "get",
       onSuccess: (data: { user: User }) => {
         if (data.user) {
           setUser(data.user)
+          setGettingUser((prevState) => ({
+            ...prevState,
+            success: true,
+          }))
         } else {
           showToast("User not found")
         }
@@ -75,21 +81,22 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  const updateUser = (name: string) => {
-    if (!user || !name) return
+  const updateUser = (u: UpdateUser) => {
+    if (!user || !u) return
 
     setUpdatingUser((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
+
+    const formData: Record<string, string> = { id: user.id }
+    if (u.name !== undefined) formData.name = u.name
 
     callAPI({
       url: "/api/user",
       method: "patch",
-      formData: {
-        name: name,
-        user_id: user.id,
-      },
+      formData: formData,
       onSuccess: () => {
         setUser((prevState) => {
           if (prevState === undefined) {
@@ -98,7 +105,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
           return {
             ...prevState,
-            name: name,
+            ...u,
           }
         })
 
@@ -107,8 +114,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           loading: false,
           success: true,
         }))
-
-        showToast("User profile updated")
       },
       onError: (error) => {
         setUpdatingUser((prevState) => ({

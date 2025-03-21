@@ -24,7 +24,13 @@ export const Navbar = () => {
             Chat
           </Text>
 
-          <IconButton variant="text" onClick={openAssistantProfile} size="sm">
+          <IconButton
+            variant="text"
+            onClick={openAssistantProfile}
+            size="sm"
+            className="p-1.5"
+            color="light"
+          >
             <Bot className="h-7 w-7" />
           </IconButton>
         </Box>

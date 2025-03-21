@@ -1,19 +1,10 @@
 import { Suspense } from "react"
-import type { Metadata } from "next"
 import { UIProvider } from "@zind/ui"
 import { Navbar } from "./navbar/Navbar"
 import { UserProvider } from "./user/UserContext"
 import { AssistantProvider } from "./assistant/AssistantContext"
 
 import "../style/globals.css"
-
-export const metadata: Metadata = {
-  title: "zind",
-  description: "",
-  icons: {
-    icon: "/assets/favicon.ico",
-  },
-}
 
 export default function RootLayout({
   children,

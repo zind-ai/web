@@ -10,16 +10,16 @@ import {
 import { useSearchParams } from "next/navigation"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
-import { assistant, get_response } from "../api/assistant/types"
+import { Assistant, get_response } from "../api/assistant/types"
 import { useUser } from "../user/UserContext"
 
 type ActionState = { loading: boolean; success: boolean }
+type UpdateAssistant = Partial<Pick<Assistant, "name" | "instructions">>
 
 interface AssistantContextProps {
-  assistant?: assistant
+  assistant?: Assistant
   gettingAssistant: ActionState
-
-  updateAssistant: (name: string, instructions: string) => void
+  updateAssistant: (assistant: UpdateAssistant) => void
   updatingAssistant: ActionState
 }
 
@@ -28,7 +28,7 @@ const AssistantContext = createContext<AssistantContextProps | undefined>(
 )
 
 export const AssistantProvider = ({ children }: { children: ReactNode }) => {
-  const [assistant, setAssistant] = useState<assistant | undefined>(undefined)
+  const [assistant, setAssistant] = useState<Assistant | undefined>(undefined)
   const [gettingAssistant, setGettingAssistant] = useState({
     loading: false,
     success: false,
@@ -60,6 +60,7 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
     setGettingAssistant((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
 
     callAPI({
@@ -68,12 +69,15 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
       onSuccess: (data: get_response) => {
         if (data.assistant) {
           setAssistant(data.assistant)
+          setGettingAssistant((prevState) => ({
+            ...prevState,
+            success: true,
+          }))
         }
 
         setGettingAssistant((prevState) => ({
           ...prevState,
           loading: false,
-          success: true,
         }))
       },
       onError: (error) => {
@@ -86,22 +90,23 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  const updateAssistant = (name: string, instructions: string) => {
-    if (!user_id || !assistant?.id || !name || !instructions) return
+  const updateAssistant = (a: UpdateAssistant) => {
+    if (!user_id || !assistant?.id || !a) return
 
     setUpdatingAssistant((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
+
+    const formData: Record<string, string> = { id: assistant.id }
+    if (a.name !== undefined) formData.name = a.name
+    if (a.instructions !== undefined) formData.instructions = a.instructions
 
     callAPI({
       url: "/api/assistant",
       method: "patch",
-      formData: {
-        id: assistant.id,
-        name: name,
-        instructions: instructions,
-      },
+      formData: formData,
       onSuccess: () => {
         setAssistant((prevState) => {
           if (prevState === undefined) {
@@ -110,8 +115,7 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
 
           return {
             ...prevState,
-            name: name,
-            instructions: instructions,
+            ...a,
           }
         })
 
@@ -120,8 +124,6 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
           loading: false,
           success: true,
         }))
-
-        showToast("AI profile updated")
       },
       onError: (error) => {
         setUpdatingAssistant((prevState) => ({

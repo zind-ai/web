@@ -1,3 +1,3 @@
 export const trim = (text?: string | null) => {
-  return text?.trim() || null
+  return text?.trim() || undefined
 }

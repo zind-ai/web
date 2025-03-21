@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import { Box, Button, Dialog, Text, Textarea, useDialog } from "@zind/ui"
+import { Box, Dialog, Text, Textarea, useDialog } from "@zind/ui"
 import { useAssistant } from "./AssistantContext"
 import { NavItem } from "../navbar/Navbar"
+import { UserName } from "../user/UserName"
 
 export const AssistantProfile = () => {
   const { assistant, updateAssistant, updatingAssistant } = useAssistant()
@@ -43,18 +44,17 @@ export const AssistantProfile = () => {
     }))
   }
 
-  const save = () => {
-    if (fields.name && fields.instructions) {
-      updateAssistant(fields.name, fields.instructions)
-    }
-  }
-
   return (
     <Dialog open={dialog} onClose={close} overlay={true}>
       <Box className="flex flex-col gap-5 p-5">
         <Text as="h2" className="mb-5 text-xl font-medium">
           AI
         </Text>
+
+        <Box className="flex flex-col gap-2">
+          <Text className="text-sm">User name</Text>
+          <UserName />
+        </Box>
 
         <Box className="flex flex-col gap-2">
           <Text className="text-sm">Name</Text>
@@ -65,6 +65,9 @@ export const AssistantProfile = () => {
             value={fields.name}
             onChange={(e) => onChange(e.target.name, e.target.value)}
             maxLength={25}
+            onSubmit={() => updateAssistant({ name: fields.name })}
+            submitLoading={updatingAssistant.loading}
+            submitShow={assistant?.name !== fields.name}
           ></Textarea>
         </Box>
 
@@ -77,21 +80,12 @@ export const AssistantProfile = () => {
             value={fields.instructions}
             onChange={(e) => onChange(e.target.name, e.target.value)}
             maxLength={250}
-          ></Textarea>
-        </Box>
-
-        <Box className="sticky bottom-5 flex justify-end">
-          <Button
-            onClick={save}
-            disabled={
-              updatingAssistant.loading ||
-              (assistant?.name === fields.name &&
-                assistant.instructions === fields.instructions)
+            onSubmit={() =>
+              updateAssistant({ instructions: fields.instructions })
             }
-            loading={updatingAssistant.loading}
-          >
-            Update
-          </Button>
+            submitLoading={updatingAssistant.loading}
+            submitShow={assistant?.instructions !== fields.instructions}
+          ></Textarea>
         </Box>
       </Box>
     </Dialog>
