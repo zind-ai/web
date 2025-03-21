@@ -121,7 +121,7 @@ export const AssistantProvider = ({ children }: { children: ReactNode }) => {
           success: true,
         }))
 
-        showToast("AI updated")
+        showToast("AI profile updated")
       },
       onError: (error) => {
         setUpdatingAssistant((prevState) => ({

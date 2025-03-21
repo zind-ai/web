@@ -1,7 +1,7 @@
 import { format } from "@zind/time"
-import { memory } from "../../memory/types"
+import { Memory } from "../../memory/types"
 
-export const formatMemories = (memories?: memory[]) => {
+export const formatMemories = (memories?: Memory[]) => {
   if (!memories || !memories.length) return ""
 
   const pastMemories = memories

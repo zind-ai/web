@@ -1,7 +1,7 @@
 import { format } from "@zind/time"
-import { chat } from "../types"
+import { Chat } from "../types"
 
-export const formatChats = (chats?: chat[]): string => {
+export const formatChats = (chats?: Chat[]): string => {
   if (!chats || !chats.length) return ""
 
   const userMessages = chats

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Box, Button, Dialog, Text, Textarea, useDialog } from "@zind/ui"
 import { useAssistant } from "./AssistantContext"
-import { NavbarDropdownItem } from "../navbar/NavbarDropdown"
+import { NavItem } from "../navbar/Navbar"
 
 export const AssistantProfile = () => {
   const { assistant, updateAssistant, updatingAssistant } = useAssistant()
@@ -17,7 +17,7 @@ export const AssistantProfile = () => {
   const navItem = searchParams.get("on")
 
   useEffect(() => {
-    if (navItem && navItem === NavbarDropdownItem.ai) {
+    if (navItem && navItem === NavItem.ai) {
       openDialog()
     }
   }, [navItem])
@@ -53,7 +53,7 @@ export const AssistantProfile = () => {
     <Dialog open={dialog} onClose={close} overlay={true}>
       <Box className="flex flex-col gap-5 p-5">
         <Text as="h2" className="mb-5 text-xl font-medium">
-          AI profile
+          AI
         </Text>
 
         <Box className="flex flex-col gap-2">

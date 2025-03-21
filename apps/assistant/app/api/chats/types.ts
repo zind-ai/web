@@ -1,6 +1,6 @@
-import { memory } from "../memory/types"
+import { Memory } from "../memory/types"
 
-export interface chat {
+export interface Chat {
   id?: string
   user_id: string
   message: string
@@ -9,12 +9,12 @@ export interface chat {
 }
 
 export interface get_response {
-  chats: chat[]
+  chats: Chat[]
   error: string | null
 }
 
 export interface post_response {
-  chat: chat | null
+  chat: Chat | null
   error: string | null
-  memories: memory[] | null
+  memories: Memory[] | null
 }

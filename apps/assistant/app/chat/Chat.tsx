@@ -2,14 +2,14 @@ import React from "react"
 import { twMerge } from "tailwind-merge"
 import { Box, Text } from "@zind/ui"
 import { openai_chat_role } from "@zind/sdk"
-import { chat } from "@/app/api/chats/types"
+import { Chat as IChat } from "@/app/api/chats/types"
 import { chatSegments } from "./chat/chatSegments"
 import ChatAssistant from "./chat/ChatAssistant"
 import ChatUser from "./chat/ChatUser"
 import { ChatMemories } from "./chat/ChatMemories"
 
 interface ChatProps {
-  chat: chat
+  chat: IChat
   showMemory: boolean
 }
 

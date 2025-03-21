@@ -7,28 +7,16 @@ import {
   ReactNode,
   useEffect,
 } from "react"
-import {
-  useUser as useAuth0User,
-  UserProvider as Auth0UserProvider,
-} from "@auth0/nextjs-auth0/client"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
+import { User } from "../api/user/types"
 
 type ActionState = { loading: boolean; success: boolean }
 
-interface User {
-  id?: string | null
-  name?: string | null
-  email?: string | null
-  photo?: string | null
-}
-
 interface UserContextProps {
   user: User | undefined
-
-  login: () => void
-  logout: () => void
-
+  getUser: () => void
+  gettingUser: ActionState
   updateUser: (name: string) => void
   updatingUser: ActionState
 }
@@ -36,17 +24,13 @@ interface UserContextProps {
 const UserContext = createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  return (
-    <Auth0UserProvider>
-      <AuthProvider>{children}</AuthProvider>
-    </Auth0UserProvider>
-  )
-}
-
-const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { user: auth0User } = useAuth0User()
-
+  const [userId] = useState("027149fd-2c3e-4475-b51a-1eaf36a98ab7")
   const [user, setUser] = useState<User | undefined>(undefined)
+
+  const [gettingUser, setGettingUser] = useState({
+    loading: false,
+    success: false,
+  })
   const [updatingUser, setUpdatingUser] = useState({
     loading: false,
     success: false,
@@ -55,24 +39,40 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { showToast } = useToast()
 
   useEffect(() => {
-    if (auth0User) {
-      setUser({
-        id: auth0User.sub,
-        name: auth0User.name,
-        email: auth0User.email,
-        photo: auth0User.picture,
-      })
-    } else {
-      setUser(undefined)
-    }
-  }, [auth0User])
+    getUser()
+  }, [])
 
-  const login = () => {
-    window.location.href = "/api/auth/login"
-  }
+  const getUser = () => {
+    if (!userId) return
 
-  const logout = () => {
-    window.location.href = "/api/auth/logout"
+    setGettingUser((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
+
+    callAPI({
+      url: `/api/user?user_id=${userId}`,
+      method: "get",
+      onSuccess: (data: { user: User }) => {
+        if (data.user) {
+          setUser(data.user)
+        } else {
+          showToast("User not found")
+        }
+
+        setGettingUser((prevState) => ({
+          ...prevState,
+          loading: false,
+        }))
+      },
+      onError: (error) => {
+        setGettingUser((prevState) => ({
+          ...prevState,
+          loading: false,
+        }))
+        showToast(error.message)
+      },
+    })
   }
 
   const updateUser = (name: string) => {
@@ -88,6 +88,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       method: "patch",
       formData: {
         name: name,
+        user_id: user.id,
       },
       onSuccess: () => {
         setUser((prevState) => {
@@ -123,8 +124,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     <UserContext
       value={{
         user,
-        login,
-        logout,
+        getUser,
+        gettingUser,
         updateUser,
         updatingUser,
       }}

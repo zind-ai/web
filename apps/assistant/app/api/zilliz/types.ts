@@ -1,3 +1,3 @@
-import { memory } from "../memory/types"
+import { Memory } from "../memory/types"
 
-export type zilliz_post_payload = memory[]
+export type zilliz_post_payload = Memory[]

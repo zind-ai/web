@@ -1,12 +1,12 @@
-import { memory } from "../../memory/types"
+import { Memory } from "../../memory/types"
 
 export interface zilliz_search_similar_memories {
   code: number
   cost: number
-  data: memory[]
+  data: Memory[]
 }
 
 export interface zilliz_search_post_response {
-  memories: memory[] | null
+  memories: Memory[] | null
   error: string | null
 }

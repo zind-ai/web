@@ -1,4 +1,4 @@
-export interface memory {
+export interface Memory {
   id?: number
   vector?: number[]
   memory: string

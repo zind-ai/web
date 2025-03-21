@@ -9,7 +9,6 @@ import { search_memory_instructions } from "./consts"
 
 export async function POST(req: Request) {
   try {
-    const cookies = req.headers.get("cookie")
     const { user_id: _user_id, message: _message } = await req.json()
 
     const user_id = trim(_user_id)
@@ -30,9 +29,6 @@ export async function POST(req: Request) {
     await callAPI({
       url: gpt_endpoint_url,
       method: "post",
-      headers: {
-        cookie: cookies,
-      },
       formData: {
         prompt: `user message: ${message}`,
         context: search_memory_instructions,
@@ -54,9 +50,6 @@ export async function POST(req: Request) {
       await callAPI({
         url: gpt_embedding_endpoint_url,
         method: "post",
-        headers: {
-          cookie: cookies,
-        },
         formData: {
           text: cue_message,
         },
@@ -78,9 +71,6 @@ export async function POST(req: Request) {
       await callAPI({
         url: zilliz_search_endpoint_url,
         method: "post",
-        headers: {
-          cookie: cookies,
-        },
         formData: {
           embedding: embedding,
         },

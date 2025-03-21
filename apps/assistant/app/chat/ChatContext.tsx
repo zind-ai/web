@@ -9,25 +9,25 @@ import {
 } from "react"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
-import { chat, get_response, post_response } from "@/app/api/chats/types"
+import { Chat, get_response, post_response } from "@/app/api/chats/types"
 import { useAssistant } from "../assistant/AssistantContext"
 import { useUser } from "../user/UserContext"
 
 type ActionState = { loading: boolean; success: boolean }
 
 interface ChatContextProps {
-  chats: chat[]
+  chats: Chat[]
   memories: post_response["memories"]
   getChats: () => void
   gettingChats: ActionState
-  addChat: (newChat: chat) => void
+  addChat: (newChat: Chat) => void
   addingChat: ActionState
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined)
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-  const [chats, setChats] = useState<chat[]>([])
+  const [chats, setChats] = useState<Chat[]>([])
   const [memories, setMemories] = useState<post_response["memories"]>(null)
   const [addingChat, setAddingChat] = useState({
     loading: false,
@@ -48,8 +48,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     getChats()
   }, [user_id])
 
-  const addChat = async (newChat: chat) => {
-    if (!newChat) return
+  const addChat = async (newChat: Chat) => {
+    if (!newChat || !user_id) return
 
     setAddingChat((prevState) => ({
       ...prevState,
@@ -71,7 +71,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       },
       onSuccess: (data: post_response) => {
         if (data.chat) {
-          setChats((prevChats) => [...prevChats, data.chat as chat])
+          setChats((prevChats) => [...prevChats, data.chat as Chat])
         }
 
         if (data.memories) {
