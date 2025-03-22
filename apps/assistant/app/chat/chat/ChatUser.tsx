@@ -1,11 +1,11 @@
 import React from "react"
 import { Text } from "@zind/ui"
 
-interface props {
+interface ChatUserProps {
   message: string
 }
 
-const ChatUser = ({ message }: props) => {
+const ChatUser = ({ message }: ChatUserProps) => {
   return <Text className="whitespace-pre-wrap">{message}</Text>
 }
 

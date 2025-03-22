@@ -1,13 +1,13 @@
 import React, { forwardRef, ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
-interface props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string
   href: string
   children?: ReactNode
 }
 
-export const Link = forwardRef<HTMLAnchorElement, props>(
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ children, href, target = "_blank", rel, className, ...props }, ref) => {
     const isExternal = target === "_blank"
     return (

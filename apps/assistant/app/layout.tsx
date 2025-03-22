@@ -1,19 +1,10 @@
-import type { Metadata } from "next"
-import { UserProvider } from "@auth0/nextjs-auth0/client"
+import { Suspense } from "react"
 import { UIProvider } from "@zind/ui"
 import { Navbar } from "./navbar/Navbar"
+import { UserProvider } from "./user/UserContext"
 import { AssistantProvider } from "./assistant/AssistantContext"
 
 import "../style/globals.css"
-import { Suspense } from "react"
-
-export const metadata: Metadata = {
-  title: "zind",
-  description: "",
-  icons: {
-    icon: "/assets/favicon.ico",
-  },
-}
 
 export default function RootLayout({
   children,
@@ -26,14 +17,14 @@ export default function RootLayout({
 
       <body className="bg-grayscale dark:bg-grayscale-800 font-sans font-normal">
         <Suspense fallback={<div>Loading...</div>}>
-          <UserProvider>
-            <UIProvider>
+          <UIProvider>
+            <UserProvider>
               <AssistantProvider>
                 <Navbar />
                 {children}
               </AssistantProvider>
-            </UIProvider>
-          </UserProvider>
+            </UserProvider>
+          </UIProvider>
         </Suspense>
       </body>
     </html>

@@ -3,14 +3,14 @@ import { twMerge } from "tailwind-merge"
 
 type TextTags = "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5"
 
-type props<T extends TextTags> = React.HTMLAttributes<HTMLElement> & {
+type TextProps<T extends TextTags> = React.HTMLAttributes<HTMLElement> & {
   as?: T
   children: ReactNode
   className?: string
   color?: "base" | "light" | "lighter" | "lightest"
 }
 
-export const Text = forwardRef<HTMLElement, props<TextTags>>(
+export const Text = forwardRef<HTMLElement, TextProps<TextTags>>(
   ({ as = "p", children, color = "base", className, ...props }, ref) => {
     const Component = as
 

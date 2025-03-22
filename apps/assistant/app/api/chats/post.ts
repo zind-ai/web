@@ -1,18 +1,17 @@
 import { callAPI, catchErrorMessage, trim } from "@zind/utils"
 import { supabase_client, openai_chat_role } from "@zind/sdk"
-import { gpt_endpoint_url } from "../gpt/consts"
-import { gpt_post_response } from "../gpt/types"
+import { gpt_endpoint_url } from "../integrations/gpt/consts"
+import { gpt_post_response } from "../integrations/gpt/types"
 import { formatMemories } from "./context/formatMemories"
-import { memory_search_endpoint_url } from "../memory/search/consts"
-import { memory_endpoint_url } from "../memory/consts"
-import { memory } from "../memory/types"
+import { memories_search_endpoint_url } from "../memories/search/consts"
+import { memories_endpoint_url } from "../memories/consts"
+import { Memory } from "../memories/types"
 import { formatChats } from "./context/formatChats"
 import { chats_table } from "./consts"
-import { chat } from "./types"
+import { Chat } from "./types"
 
 export async function POST(req: Request) {
   try {
-    const cookies = req.headers.get("cookie")
     const {
       user_id: _user_id,
       message: _message,
@@ -37,16 +36,13 @@ export async function POST(req: Request) {
     // search memories
     let memories = undefined
     await callAPI({
-      url: memory_search_endpoint_url,
+      url: memories_search_endpoint_url,
       method: "post",
-      headers: {
-        cookie: cookies,
-      },
       formData: {
         user_id: user_id,
         message: message,
       },
-      onSuccess: async (data: { memories: memory[] }) => {
+      onSuccess: async (data: { memories: Memory[] }) => {
         if (data.memories) {
           memories = data.memories
         }
@@ -65,9 +61,6 @@ export async function POST(req: Request) {
     await callAPI({
       url: gpt_endpoint_url,
       method: "post",
-      headers: {
-        cookie: cookies,
-      },
       formData: {
         prompt: message,
         context: context,
@@ -106,7 +99,7 @@ export async function POST(req: Request) {
 
       // 4. send back assistant's reply
       const assistant_chat = lastChats.find(
-        (chat: chat) => chat.role === openai_chat_role.assistant
+        (chat: Chat) => chat.role === openai_chat_role.assistant
       )
 
       const response = new Response(
@@ -122,16 +115,13 @@ export async function POST(req: Request) {
 
       // 5. save memory
       const user_chat = lastChats.find(
-        (chat: chat) => chat.role === openai_chat_role.user
+        (chat: Chat) => chat.role === openai_chat_role.user
       )
       const memory_context = `${recent_chats}\n\n${past_memories}`
 
       await callAPI({
-        url: memory_endpoint_url,
+        url: memories_endpoint_url,
         method: "post",
-        headers: {
-          cookie: cookies,
-        },
         formData: {
           user_id: user_id,
           message: message,

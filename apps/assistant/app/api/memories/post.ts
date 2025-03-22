@@ -1,16 +1,15 @@
 import { callAPI, catchErrorMessage, trim } from "@zind/utils"
 import { format } from "@zind/time"
-import { gpt_endpoint_url } from "../gpt/consts"
-import { gpt_post_response } from "../gpt/types"
-import { gpt_embedding_endpoint_url } from "../gpt/embedding/consts"
-import { gpt_embedding_post_response } from "../gpt/embedding/types"
-import { zilliz_post_payload } from "../zilliz/types"
-import { zilliz_endpoint_url } from "../zilliz/consts"
+import { gpt_endpoint_url } from "../integrations/gpt/consts"
+import { gpt_post_response } from "../integrations/gpt/types"
+import { gpt_embedding_endpoint_url } from "../integrations/gpt/embedding/consts"
+import { gpt_embedding_post_response } from "../integrations/gpt/embedding/types"
+import { zilliz_post_payload } from "../integrations/zilliz/types"
+import { zilliz_endpoint_url } from "../integrations/zilliz/consts"
 import { add_memory_instructions } from "./consts"
 
 export async function POST(req: Request) {
   try {
-    const cookies = req.headers.get("cookie")
     const {
       user_id: _user_id,
       message: _message,
@@ -42,9 +41,6 @@ export async function POST(req: Request) {
     await callAPI({
       url: gpt_endpoint_url,
       method: "post",
-      headers: {
-        cookie: cookies,
-      },
       formData: {
         prompt: message,
         context: `${add_memory_instructions} - ${context}`,
@@ -69,9 +65,6 @@ export async function POST(req: Request) {
       await callAPI({
         url: gpt_embedding_endpoint_url,
         method: "post",
-        headers: {
-          cookie: cookies,
-        },
         formData: {
           text: summary,
         },
@@ -101,9 +94,6 @@ export async function POST(req: Request) {
       await callAPI({
         url: zilliz_endpoint_url,
         method: "post",
-        headers: {
-          cookie: cookies,
-        },
         formData: {
           data: data,
         },

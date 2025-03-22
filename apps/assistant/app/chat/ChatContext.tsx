@@ -7,27 +7,27 @@ import {
   ReactNode,
   useEffect,
 } from "react"
-import { useUser } from "@auth0/nextjs-auth0/client"
 import { useToast } from "@zind/ui"
 import { callAPI } from "@zind/utils"
-import { chat, get_response, post_response } from "@/app/api/chats/types"
+import { Chat, get_response, post_response } from "@/app/api/chats/types"
 import { useAssistant } from "../assistant/AssistantContext"
+import { useUser } from "../user/UserContext"
 
-type action = { loading: boolean; success: boolean }
+type ActionState = { loading: boolean; success: boolean }
 
 interface ChatContextProps {
-  chats: chat[]
+  chats: Chat[]
   memories: post_response["memories"]
   getChats: () => void
-  gettingChats: action
-  addChat: (newChat: chat) => void
-  addingChat: action
+  gettingChats: ActionState
+  addChat: (newChat: Chat) => void
+  addingChat: ActionState
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined)
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-  const [chats, setChats] = useState<chat[]>([])
+  const [chats, setChats] = useState<Chat[]>([])
   const [memories, setMemories] = useState<post_response["memories"]>(null)
   const [addingChat, setAddingChat] = useState({
     loading: false,
@@ -39,7 +39,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   })
 
   const { user } = useUser()
-  const user_id = user?.sub
+  const user_id = user?.id
 
   const { assistant } = useAssistant()
   const { showToast } = useToast()
@@ -48,12 +48,13 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     getChats()
   }, [user_id])
 
-  const addChat = async (newChat: chat) => {
-    if (!newChat) return
+  const addChat = async (newChat: Chat) => {
+    if (!newChat || !user_id) return
 
     setAddingChat((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
 
     setChats((prevChats) => [...prevChats, newChat])
@@ -71,7 +72,11 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       },
       onSuccess: (data: post_response) => {
         if (data.chat) {
-          setChats((prevChats) => [...prevChats, data.chat as chat])
+          setChats((prevChats) => [...prevChats, data.chat as Chat])
+          setAddingChat((prevState) => ({
+            ...prevState,
+            success: true,
+          }))
         }
 
         if (data.memories) {
@@ -81,7 +86,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         setAddingChat((prevState) => ({
           ...prevState,
           loading: false,
-          success: true,
         }))
       },
       onError(error) {
@@ -100,23 +104,24 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     setGettingChats((prevState) => ({
       ...prevState,
       loading: true,
+      success: false,
     }))
 
     callAPI({
       url: `/api/chats?user_id=${user_id}`,
       method: "get",
       onSuccess: (data: get_response) => {
-        setChats((prevChats) => {
-          if (prevChats.length === 0) {
-            return data.chats
-          }
-          return prevChats
-        })
+        if (data.chats) {
+          setChats(data.chats)
+          setGettingChats((prevState) => ({
+            ...prevState,
+            success: true,
+          }))
+        }
 
         setGettingChats((prevState) => ({
           ...prevState,
           loading: false,
-          success: true,
         }))
       },
       onError: (error) => {

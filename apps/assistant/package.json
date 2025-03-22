@@ -11,7 +11,6 @@
     "format": "prettier --write . --ignore-path ../../.prettierignore"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "3",
     "@zind/sdk": "workspace:*",
     "@zind/time": "workspace:*",
     "@zind/ui": "workspace:*",

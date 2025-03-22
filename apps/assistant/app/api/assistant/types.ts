@@ -1,4 +1,4 @@
-export interface assistant {
+export interface Assistant {
   id?: string
   user_id: string
   name: string
@@ -7,6 +7,6 @@ export interface assistant {
 }
 
 export interface get_response {
-  assistant: assistant | null
+  assistant: Assistant | null
   error: string | null
 }
