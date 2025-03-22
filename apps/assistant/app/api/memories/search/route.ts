@@ -1,10 +1,10 @@
 import { callAPI, catchErrorMessage, trim } from "@zind/utils"
-import { gpt_endpoint_url } from "../../gpt/consts"
-import { gpt_post_response } from "../../gpt/types"
-import { gpt_embedding_endpoint_url } from "../../gpt/embedding/consts"
-import { gpt_embedding_post_response } from "../../gpt/embedding/types"
-import { zilliz_search_post_response } from "../../zilliz/search/types"
-import { zilliz_search_endpoint_url } from "../../zilliz/search/consts"
+import { gpt_endpoint_url } from "../../integrations/gpt/consts"
+import { gpt_post_response } from "../../integrations/gpt/types"
+import { gpt_embedding_endpoint_url } from "../../integrations/gpt/embedding/consts"
+import { gpt_embedding_post_response } from "../../integrations/gpt/embedding/types"
+import { zilliz_search_post_response } from "../../integrations/zilliz/search/types"
+import { zilliz_search_endpoint_url } from "../../integrations/zilliz/search/consts"
 import { search_memory_instructions } from "./consts"
 
 export async function POST(req: Request) {

@@ -3,17 +3,17 @@
 import { useRouter } from "next/navigation"
 import { Bot } from "lucide-react"
 import { Box, IconButton, Text } from "@zind/ui"
-import { AssistantProfile } from "../assistant/AssistantProfile"
+import { NavbarSettings } from "./NavbarSettings"
 
 export enum NavItem {
-  ai = "ai",
+  settings = "settings",
 }
 
 export const Navbar = () => {
   const router = useRouter()
 
-  const openAssistantProfile = () => {
-    router.push(`?on=${NavItem.ai}`, { scroll: false })
+  const openSettings = () => {
+    router.push(`?on=${NavItem.settings}`, { scroll: false })
   }
 
   return (
@@ -26,7 +26,7 @@ export const Navbar = () => {
 
           <IconButton
             variant="text"
-            onClick={openAssistantProfile}
+            onClick={openSettings}
             size="sm"
             className="p-1.5"
             color="light"
@@ -36,7 +36,7 @@ export const Navbar = () => {
         </Box>
       </Box>
 
-      <AssistantProfile />
+      <NavbarSettings />
     </>
   )
 }
